@@ -13,7 +13,7 @@ const CursorTracker = () => {
   return (
     hoveredIndex === 0 && (
       <div
-        className="w-4 h-4 bg-blue-500 rounded-full opacity-70 transition-transform duration-100 fixed z-50 pointer-events-none"
+        className="hidden md:block w-4 h-4 bg-blue-500 rounded-full opacity-70 transition-transform duration-300 fixed z-50 pointer-events-none"
         style={{
           top: hoverPos.y,
           left: hoverPos.x,

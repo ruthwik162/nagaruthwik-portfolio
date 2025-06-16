@@ -1,94 +1,186 @@
-import React from 'react'
-import { delay, motion, } from 'framer-motion'
+import React, { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+const fadeUp = {
+  hidden: { y: 80, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
+  }
+};
+
+const fadeRight = (delay = 0) => ({
+  hidden: { x: 80, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { delay, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
+  }
+});
+
+const inputVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  },
+  hover: {
+    scale: 1.02,
+    transition: { duration: 0.2 }
+  }
+};
+
 const Form = () => {
-    const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: false });
+  const [ref, inView] = useInView({ threshold: 0.2 });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
-    const fadeUp = {
-        hidden: { y: 80, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
-            }
-        }
-    };
-    const fadeRight = {
-        hidden: { x: 80, opacity: 0 },
-        visible: {
-            x: 0,
-            opacity: 1,
-            transition: {
-                delay: 0.4,
-                duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
-            }
-        }
-    }
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-    return (
-        <div>
-            <form ref={ref} class="flex w-full flex-col items-center text-sm  bg-white dark:bg-black  rouded p-10 text-black dark:text-white overflow-hidden ">
-                <motion.div
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                    variants={fadeUp}
-                    className=' px-40 p-10 border text-black dark:text-white  rounded-2xl'
-                >
-                    <p class="text-xs bg-indigo-200 text-indigo-600 font-medium px-3 py-1 text-center rounded-full">Contact Us</p>
-                    <h1 class="text-4xl font-bold py-4 text-center">Let’s Get In Touch.</h1>
-                    <p class="max-md:text-sm text-gray-500 pb-10 text-center">
-                        Or just reach out manually at <a href="#" class="text-indigo-600 hover:underline">nagaruthwikmerugu162@gmail.com</a>
-                    </p>
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitSuccess(false), 3000);
+    }, 1500);
+  }, []);
 
-                    <motion.div
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={fadeRight}
-                        class="max-w-7xl  w-full px-25">
-                        <label  class="font-medium">Full Name</label>
-                        <motion.div
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={fadeRight} 
-                            className="flex items-center mt-2 mb-4 h-10 pl-3 border border-slate-300 rounded-full focus-within:ring-2 focus-within:ring-indigo-400 transition-all overflow-hidden">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.311 16.406a9.64 9.64 0 0 0-4.748-4.158 5.938 5.938 0 1 0-7.125 0 9.64 9.64 0 0 0-4.749 4.158.937.937 0 1 0 1.623.938c1.416-2.447 3.916-3.906 6.688-3.906 2.773 0 5.273 1.46 6.689 3.906a.938.938 0 0 0 1.622-.938M5.938 7.5a4.063 4.063 0 1 1 8.125 0 4.063 4.063 0 0 1-8.125 0" fill="#475569" />
-                            </svg>
-                            <input type="text" class="h-full px-2 w-full outline-none bg-transparent" placeholder="Enter your full name" required />
-                        </motion.div>
+  return (
+    <div ref={ref} className="w-full px-4 bg-white dark:bg-black sm:px-6 lg:px-8 py-12">
+      <motion.form
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        variants={fadeUp}
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center overflow-hidden  mx-auto   p-8 sm:p-12 text-black dark:text-white shadow-xl transition-shadow duration-300"
+        aria-label="Contact form"
+      >
+        {/* Header */}
+        <motion.div variants={fadeRight(0.2)} className="w-full text-center">
+          <p className="inline-block text-xs bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 font-medium px-4 py-1.5 rounded-full mb-6">
+            Contact Us
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Let's Get In Touch
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+            Or reach out at{' '}
+            <a href="mailto:nagaruthwikmerugu162@gmail.com" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
+              nagaruthwikmerugu162@gmail.com
+            </a>
+          </p>
+        </motion.div>
 
-                        <label for="email-address" class="font-medium mt-4">Email Address</label>
-                        <motion.div
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={fadeRight} 
-                            transition={{delay:0.5}}
-                            className="flex items-center mt-2 mb-4 h-10 pl-3 border border-slate-300 rounded-full focus-within:ring-2 focus-within:ring-indigo-400 transition-all overflow-hidden">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.5 3.438h-15a.937.937 0 0 0-.937.937V15a1.563 1.563 0 0 0 1.562 1.563h13.75A1.563 1.563 0 0 0 18.438 15V4.375a.94.94 0 0 0-.938-.937m-2.41 1.874L10 9.979 4.91 5.313zM3.438 14.688v-8.18l5.928 5.434a.937.937 0 0 0 1.268 0l5.929-5.435v8.182z" fill="#475569" />
-                            </svg>
-                            <input type="email" class="h-full px-2 w-full outline-none bg-transparent" placeholder="Enter your email address" required />
-                        </motion.div>
+        {/* Fields */}
+        <div className="w-full max-w-2xl space-y-6">
+          {/* Name */}
+          <motion.div variants={fadeRight(0.3)}>
+            <label htmlFor="name" className="block font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+            <motion.div variants={inputVariants} whileHover="hover" className="flex items-center h-14 pl-4 bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden">
+              <svg width="20" height="20" fill="none" className="text-gray-500 dark:text-gray-400"><path  fill="currentColor" /></svg>
+              <input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="h-full px-4 w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
+                placeholder="Enter your full name"
+                required
+              />
+            </motion.div>
+          </motion.div>
 
-                        <label for="message" class="font-medium mt-4">Message</label>
-                        <textarea rows="4" class="w-full mt-2 p-2 bg-transparent border border-slate-300 rounded-lg resize-none outline-none focus:ring-2 focus-within:ring-indigo-400 transition-all" placeholder="Enter your message" required></textarea>
+          {/* Email */}
+          <motion.div variants={fadeRight(0.4)}>
+            <label htmlFor="email" className="block font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+            <motion.div variants={inputVariants} whileHover="hover" className="flex items-center h-14 pl-4 bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden">
+              <svg width="20" height="20" fill="none" className="text-gray-500 dark:text-gray-400"><path  fill="currentColor" /></svg>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="h-full px-4 w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
+                placeholder="Enter your email address"
+                required
+              />
+            </motion.div>
+          </motion.div>
 
-                        <button type="submit" class="flex items-center justify-center gap-1 mt-5 bg-indigo-500 hover:bg-indigo-600 text-white py-2.5 w-full rounded-full transition">
-                            Submit Form
-                            <svg class="mt-0.5" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m18.038 10.663-5.625 5.625a.94.94 0 0 1-1.328-1.328l4.024-4.023H3.625a.938.938 0 0 1 0-1.875h11.484l-4.022-4.025a.94.94 0 0 1 1.328-1.328l5.625 5.625a.935.935 0 0 1-.002 1.33" fill="#fff" />
-                            </svg>
-                        </button>
-                    </motion.div>
-                </motion.div>
-            </form>
+          {/* Message */}
+          <motion.div variants={fadeRight(0.5)}>
+            <label htmlFor="message" className="block font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+            <motion.textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows="5"
+              variants={inputVariants}
+              whileHover="hover"
+              className="w-full p-4 bg-gray-50 dark:bg-gray-800 rounded-xl outline-none resize-none placeholder-gray-400 dark:placeholder-gray-500"
+              placeholder="Enter your message"
+              required
+            />
+          </motion.div>
+
+          {/* Submit Button */}
+          <motion.div variants={fadeRight(0.6)} className="pt-4">
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+              className={`w-full h-14 rounded-xl flex items-center justify-center gap-2 text-white font-medium ${
+                isSubmitting
+                  ? 'bg-indigo-400 dark:bg-indigo-600'
+                  : 'bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800'
+              } transition-colors`}
+            >
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8..." />
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Submit Form
+                  <svg width="20" height="20" fill="none"><path  fill="currentColor" /></svg>
+                </>
+              )}
+            </motion.button>
+          </motion.div>
+
+          {/* Success Message */}
+          {submitSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-xl text-center"
+            >
+              Thank you! Your message has been sent successfully.
+            </motion.div>
+          )}
         </div>
-    )
-}
+      </motion.form>
+    </div>
+  );
+};
 
-export default Form
+export default Form;

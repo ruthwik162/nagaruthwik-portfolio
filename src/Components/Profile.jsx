@@ -2,7 +2,7 @@ import React from 'react';
 import { assets } from '../assets/assets';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiGithub, FiLinkedin, FiMail, FiPhone, FiTwitter } from 'react-icons/fi';
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiPhone, FiTwitter } from 'react-icons/fi';
 import { SiLeetcode } from 'react-icons/si';
 
 const Profile = () => {
@@ -82,7 +82,7 @@ const Profile = () => {
 
             {/* Main content */}
             <div className="relative z-10 max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+                <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-10">
                     {/* Textual Info */}
                     <div className="space-y-4 md:space-y-8">
                         <motion.h1
@@ -108,7 +108,7 @@ const Profile = () => {
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
                             variants={fadeRight}
-                            className="flex flex-wrap items-center gap-4 mt-4"
+                            className="flex text-[2.5vw] md:text-[1vw] items-center gap-1 mt-4"
                         >
                             <a
                                 href="mailto:nagaruthwikmerugu162@gmail.com"
@@ -125,6 +125,15 @@ const Profile = () => {
                                 <FiPhone className="text-green-600 dark:text-green-400" />
                                 <span>+91 91822 16089</span>
                             </a>
+                            <a
+                                href="https://drive.google.com/file/d/1WaTzC-KkzJvtNrAmWWOSKEoas0rXKaQo/view"
+                                download
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+                            >
+                                <FiDownload className="text-lg" />
+                                Download Resume
+                            </a>
+
                         </motion.div>
 
                         {/* Social Links */}
@@ -136,11 +145,11 @@ const Profile = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label={label}
-                                    whileHover={{scale:1.3}}
+                                    whileHover={{ scale: 1.3 }}
                                     initial="hidden"
                                     animate={inView ? "visible" : "hidden"}
                                     variants={fadeUp(0.3 + index * 0.1)}
-                                    
+
 
                                     className={`p-2 rounded-full bg-gray-100 dark:bg-gray-800 ${color} hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors`}
                                 >
@@ -154,9 +163,9 @@ const Profile = () => {
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
                             variants={fadeUp(0.6)}
-                            className="max-w-xl font-poppins text-base sm:text-lg text-gray-950 dark:text-gray-300 mt-4"
+                            className="max-w-4xl  font-poppins text-base sm:text-lg text-gray-950 dark:text-gray-300 mt-4"
                         >
-                            Full Stack Developer specializing in React, Node.js, and modern web technologies. Passionate about building performant, accessible, and scalable applications.
+                            Passionate Full Stack Developer with hands-on experience in building responsive and scalable web applications using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. Currently pursuing a B.Tech in Computer Science at Malla Reddy University, I excel at transforming complex user requirements into seamless digital solutions. I am also currently interning from May 25th to August 25th, 2025, gaining real-world experience and sharpening my development skills in a professional environment.
                         </motion.p>
                     </div>
 

@@ -3,14 +3,14 @@ import { useTheme } from "../ThemeContext/ThemeContext";
 import ThemeToggle from "../ThemeContext/ThemeToggle";
 import { Link, NavLink } from "react-router-dom";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { PiFile, PiFireSimpleDuotone } from "react-icons/pi";
 
 const Navbar = () => {
-  const { darkMode, setDarkMode } = useTheme();
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Skills", path: "/skill" },
-    { name: "About", path: "/" },
+    { name: "Experience", path: "/experience" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,18 +33,19 @@ const Navbar = () => {
               <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
-          <div className="rounded-full flex items-center justify-center gap-2">
-            <ThemeToggle /> mode
-          </div>
         </div>
 
         <div className="hidden md:flex items-center gap-4">
           {/* Insta */}
           <FiInstagram />
-          <FiLinkedin/>
-          <FiGithub/>
-
+          <FiLinkedin />
+          <FiGithub />
+          <PiFile />
+          <div className="rounded-full flex items-center justify-center gap-2">
+            <ThemeToggle /> mode
+          </div>
         </div>
+
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 md:hidden">
@@ -65,12 +66,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-white dark:bg-gray-800 text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 dark:text-white transition-all duration-500 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 w-full h-screen bg-white dark:bg-black text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 dark:text-white transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <button
-          className="absolute top-4 right-4"
+          className="absolute top-6 right-6"
           onClick={() => setIsMenuOpen(false)}
         >
           <svg
@@ -90,25 +90,15 @@ const Navbar = () => {
             key={i}
             to={link.path}
             onClick={() => setIsMenuOpen(false)}
-            className="text-lg"
+            className="text-xl"
           >
             {link.name}
           </Link>
         ))}
 
-        <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
-          New Launch
-        </button>
-
-        <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
-          Login
-        </button>
-        <button
-          onClick={() => setDarkMode((prev) => !prev)}
-          className="px-4 py-2 rounded-full bg-gray-300 dark:bg-gray-600"
-        >
-          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
+        <div className="rounded-xl flex flex-col border p-2 items-center justify-center gap-2">
+          <ThemeToggle /> mode
+        </div>
       </div>
     </nav>
   );
