@@ -13,20 +13,14 @@ export const ThemeProvider = ({ children }) => {
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e, index = null) => {
-    const rect = e.currentTarget.getBoundingClientRect();
     setHoveredIndex(index);
-    setHoverPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setHoverPos({ x: e.clientX, y: e.clientY });
   };
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add("dark");
-      root.classList.remove("light");
-    } else {
-      root.classList.remove("dark");
-      root.classList.add("light");
-    }
+    const root = document.documentElement;
+    root.classList.toggle("dark", darkMode);
+    root.classList.toggle("light", !darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
