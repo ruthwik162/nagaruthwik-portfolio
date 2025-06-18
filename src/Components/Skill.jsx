@@ -141,7 +141,7 @@ const Skill = () => {
             variants={fadeUp}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
-            className="grid grid-cols-3 border rounded-lg p-5 px-10 w-full gap-4  md:w-1/3"
+            className="grid grid-cols-3 border border-gray-200 dark:border-gray-700 rounded-xl p-6 w-full gap-6 md:w-1/3"
           >
             {pic.map((element, index) => (
               <motion.div
@@ -149,19 +149,53 @@ const Skill = () => {
                 variants={floatingVariants(index)}
                 initial="hidden"
                 animate="show"
-                whileHover="hover"
-                className="cursor-pointer group relative"
+                whileHover={{
+                  y: -5,
+                  transition: { duration: 0.2 }
+                }}
+                className="cursor-pointer group relative flex flex-col items-center"
               >
-                <div className="relative overflow-hidden flex justify-center items-center rounded-xl shadow-lg aspect-square">
+                {/* Text with subtle hover effect */}
+                <motion.p
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 text-center"
+                  whileHover={{ color: "#6366f1" }}
+                >
+                  {element.name}
+                </motion.p>
+
+                {/* Image container with enhanced effects */}
+                <div className="relative overflow-hidden flex justify-center items-center rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 aspect-square w-full">
                   <motion.img
                     src={element.img}
                     alt={element.name}
                     className="md:w-20 md:h-20 h-16 w-16 rounded-lg object-cover"
+                    whileHover={{
+                      scale: 1.1,
+                      transition: { duration: 0.3 }
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
-                    <h1 className="text-white font-bold text-sm md:text-lg">{element.name}</h1>
-                  </div>
+
+                  {/* Subtle overlay on hover */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-xl" />
+
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_15px_rgba(99,102,241,0.3)]" />
                 </div>
+
+                {/* Optional subtle pulse animation */}
+                <motion.div
+                  className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none"
+                  initial={{ scale: 0.95 }}
+                  animate={{
+                    scale: 1,
+                    opacity: 0,
+                    transition: {
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "easeOut"
+                    }
+                  }}
+                />
               </motion.div>
             ))}
           </motion.div>

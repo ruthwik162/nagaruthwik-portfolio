@@ -2,8 +2,8 @@ import React from 'react';
 import { assets } from '../assets/assets';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiDownload, FiGithub, FiLinkedin, FiMail, FiPhone, FiTwitter } from 'react-icons/fi';
-import { SiLeetcode } from 'react-icons/si';
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone, FiTwitter } from 'react-icons/fi';
+import { SiHackerrank, SiLeetcode } from 'react-icons/si';
 
 const Profile = () => {
     const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: false });
@@ -22,16 +22,38 @@ const Profile = () => {
     });
 
     const fadeRight = {
-        hidden: { x: 80, opacity: 0 },
+        hidden: {
+            x: 80,
+            opacity: 0,
+        },
         visible: {
             x: 0,
             opacity: 1,
             transition: {
-                duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
+                type: "spring",
+                stiffness: 60,
+                damping: 14,
+                delay: 0.1, // optional: fine-tune or remove
             }
         }
     };
+    const fadeLeft = {
+        hidden: {
+            x: -80,
+            opacity: 0,
+        },
+        visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 60,
+                damping: 14,
+                delay: 0.1, // optional: fine-tune or remove
+            }
+        }
+    };
+
 
     const imageVariants = {
         hidden: { opacity: 0, scale: 0.95 },
@@ -68,7 +90,9 @@ const Profile = () => {
         { icon: <FiGithub />, url: "https://github.com/ruthwik162", label: "GitHub", color: "text-gray-800 dark:text-gray-200" },
         { icon: <FiLinkedin />, url: "https://linkedin.com/in/nagaruthwikmerugu", label: "LinkedIn", color: "text-blue-600 dark:text-blue-400" },
         { icon: <FiTwitter />, url: "https://twitter.com", label: "Twitter", color: "text-sky-500 dark:text-sky-400" },
-        { icon: <SiLeetcode />, url: "https://leetcode.com", label: "LeetCode", color: "text-amber-600 dark:text-amber-400" }
+        { icon: <SiLeetcode />, url: "https://leetcode.com", label: "LeetCode", color: "text-amber-600 dark:text-amber-400" },
+        { icon: <SiHackerrank />, url: "https://www.hackerrank.com/profile/nagaruthwikmeru1", label: "LeetCode", color: "text-amber-600 dark:text-amber-400" }
+
     ];
 
     return (
@@ -88,8 +112,8 @@ const Profile = () => {
                         <motion.h1
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            variants={fadeRight}
-                            className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tighter"
+                            variants={fadeLeft}
+                            className="text-4xl px-5 md:px-10 sm:text-6xl md:text-7xl font-bold uppercase tracking-tighter"
                         >
                             Merugu
                         </motion.h1>
@@ -98,7 +122,7 @@ const Profile = () => {
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
                             variants={fadeUp(0.2)}
-                            className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase ml-4 sm:ml-12 -mt-2 sm:-mt-6 tracking-tighter"
+                            className="text-4xl sm:text-6xl md:text-7xl  font-bold uppercase ml-4 sm:ml-12 -mt-2 sm:-mt-6 tracking-tighter"
                         >
                             Naga Ruthwik
                         </motion.h2>
@@ -108,33 +132,47 @@ const Profile = () => {
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
                             variants={fadeRight}
-                            className="flex text-[2.5vw] md:text-[1vw] items-center gap-1 mt-4"
+                            className="grid grid-cols-2 md:flex md:flex-row items-center justify-center md:justify-start gap-2 mt-4"
                         >
+                            {/* Email */}
                             <a
                                 href="mailto:nagaruthwikmerugu162@gmail.com"
                                 className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                                aria-label="Send Email"
                             >
                                 <FiMail className="text-indigo-600 dark:text-indigo-400" />
                                 <span>Email</span>
                             </a>
 
+                            {/* Phone */}
                             <a
                                 href="tel:+919182216089"
                                 className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                                aria-label="Call Phone"
                             >
-                                <FiPhone className="text-green-600 dark:text-green-400" />
-                                <span>+91 91822 16089</span>
-                            </a>
-                            <a
-                                href="https://drive.google.com/file/d/1WaTzC-KkzJvtNrAmWWOSKEoas0rXKaQo/view"
-                                download
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
-                            >
-                                <FiDownload className="text-lg" />
-                                Download Resume
+                                <FiPhone className="text-green-600  dark:text-green-400" />
+                                <span className='text-[3vw] md:text-[1vw]'>+91 91822 16089</span>
                             </a>
 
+                            {/* Resume Download */}
+                            <a
+                                href="https://drive.google.com/file/d/1WaTzC-KkzJvtNrAmWWOSKEoas0rXKaQo/view"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                                aria-label="Download Resume"
+                            >
+                                <FiDownload className="text-lg" />
+                                <span className='text-[3vw] md:text-[1vw]'>Download Resume</span>
+                            </a>
+
+                            {/* Location (non-clickable) */}
+                            <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg cursor-default">
+                                <FiMapPin className="text-red-600 dark:text-red-400" />
+                                <span className='text-[2vw] md:text-[1vw]'>Hyderabad, Telangana</span>
+                            </div>
                         </motion.div>
+
 
                         {/* Social Links */}
                         <div className="flex gap-3 mt-3">
@@ -165,8 +203,7 @@ const Profile = () => {
                             variants={fadeUp(0.6)}
                             className="max-w-4xl  font-poppins text-base sm:text-lg text-gray-950 dark:text-gray-300 mt-4"
                         >
-                            Passionate Full Stack Developer with hands-on experience in building responsive and scalable web applications using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. Currently pursuing a B.Tech in Computer Science at Malla Reddy University, I excel at transforming complex user requirements into seamless digital solutions. I am also currently interning from May 25th to August 25th, 2025, gaining real-world experience and sharpening my development skills in a professional environment.
-                        </motion.p>
+                            I’m a passionate Full Stack Developer with experience building responsive, scalable web apps using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. I'm currently pursuing a B.Tech in Computer Science at Malla Reddy University. Right now, I'm also doing an internship (May 25 – August 25, 2025), where I'm gaining real-world experience and improving my development skills.                        </motion.p>
                     </div>
 
                     {/* Profile Image */}
@@ -198,8 +235,8 @@ const Profile = () => {
                             <motion.span
                                 className="h-2 w-2 bg-green-400 rounded-full shadow-green-glow"
                                 animate={{
-                                    scale: [0.8, 1.2, 0.8],
-                                    opacity: [0.8, 1, 0.8],
+                                    scale: [0.5, 1, 0.5],
+                                    opacity: [0.4, 1, 0.4],
                                 }}
                                 transition={{
                                     duration: 2.2,
