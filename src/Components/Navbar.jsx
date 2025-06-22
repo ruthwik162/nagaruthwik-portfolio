@@ -66,6 +66,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
+      onClick={(e)=> e.stopPropagation()}
         className={`fixed top-0 left-0 w-full h-screen bg-white dark:bg-black text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 dark:text-white transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
@@ -91,7 +92,7 @@ const Navbar = () => {
             to={link.path}
             onClick={() => setIsMenuOpen(false)}
             className="text-xl"
-          >
+          > 
             {link.name}
           </Link>
         ))}

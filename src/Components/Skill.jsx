@@ -112,13 +112,14 @@ const Skill = () => {
               animate={inView ? 'visible' : 'hidden'}
               className="p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md w-full"
             >
-              <h1 className='font-bold text-lg md:text-2xl mb-4 text-gray-800 dark:text-white'>Techniques</h1>
-              <ul className='flex flex-wrap gap-2 md:gap-4 text-sm md:text-md'>
-                <li>ReactJs</li>
-                <li>Tailwind CSS</li>
+              <h1 className='font-bold text-lg md:text-2xl mb-4 text-gray-800 dark:text-white'>MERN-Stack Techniques</h1>
+              <ul className="flex flex-wrap gap-2 md:gap-4 text-sm md:text-md mt-2">
+                <li>MongoDB</li>
+                <li>Express.js</li>
+                <li>React.js</li>
+                <li>Node.js</li>
                 <li>JavaScript</li>
-                <li>Express</li>
-                <li>Node</li>
+                <li>Tailwind CSS</li>
               </ul>
             </motion.div>
 
@@ -128,11 +129,15 @@ const Skill = () => {
               animate={inView ? 'visible' : 'hidden'}
               className="p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md w-full"
             >
-              <h1 className='font-bold text-xl md:text-2xl mb-4 text-gray-800 dark:text-white'>Database</h1>
-              <ul className='flex flex-wrap gap-2 md:gap-4 text-base md:text-md'>
-                <li>MongoDB</li>
+              <h2 className='font-bold text-xl md:text-2xl mb-4 text-gray-800 dark:text-white'>Java + Spring Boot</h2>
+              <ul className="flex flex-wrap gap-2 md:gap-4 text-sm md:text-md mt-2">
+                <li>Java</li>
+                <li>Spring Boot</li>
                 <li>MySQL</li>
+                <li>REST API</li>
+                <li>JPA / Hibernate</li>
               </ul>
+
             </motion.div>
           </div>
 
@@ -202,7 +207,7 @@ const Skill = () => {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 };
 

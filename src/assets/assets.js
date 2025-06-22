@@ -32,7 +32,7 @@ export const dummyImages=[
     },
     {
         img:spring,
-        name:"Node"
+        name:"Spring"
     },
     {
         img:express,
