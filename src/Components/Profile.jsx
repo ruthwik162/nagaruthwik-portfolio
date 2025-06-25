@@ -156,7 +156,7 @@ const Profile = () => {
 
                             {/* Resume Download */}
                             <a
-                                href="https://drive.google.com/file/d/1WaTzC-KkzJvtNrAmWWOSKEoas0rXKaQo/view"
+                                href="https://drive.google.com/file/d/1OE-B7-Kz7AurNWbsBh4zVo9yxRJ6sUUE/view"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
@@ -201,7 +201,7 @@ const Profile = () => {
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
                             variants={fadeUp(0.6)}
-                            className="max-w-4xl  font-poppins text-base sm:text-lg text-gray-950 dark:text-gray-300 mt-4"
+                            className="max-w-4xl  font-poppins text-sm sm:text-lg text-gray-950 dark:text-gray-300 mt-4"
                         >
                             I’m a passionate Full Stack Developer with experience building responsive, scalable web apps using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. I'm currently pursuing a B.Tech in Computer Science at Malla Reddy University. Right now, I'm also doing an internship (May 25 – August 25, 2025), where I'm gaining real-world experience and improving my development skills.                        </motion.p>
                     </div>

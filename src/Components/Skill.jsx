@@ -187,7 +187,6 @@ const Skill = () => {
                   <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_15px_rgba(99,102,241,0.3)]" />
                 </div>
 
-                {/* Optional subtle pulse animation */}
                 <motion.div
                   className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none"
                   initial={{ scale: 0.95 }}

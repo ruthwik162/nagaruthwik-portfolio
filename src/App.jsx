@@ -12,7 +12,7 @@ function App() {
     <ThemeProvider>
       <CursorTracker />
       <Navbar />
-      <Routes>
+      <Routes >
         <Route path="/" element={<Home />} />
         <Route path="/skill" element={<Skill />} />
       </Routes>
