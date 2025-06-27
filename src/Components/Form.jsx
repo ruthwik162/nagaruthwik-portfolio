@@ -57,13 +57,13 @@ const Form = () => {
   }, []);
 
   return (
-    <div ref={ref} className="w-full px-4 bg-white dark:bg-black sm:px-6 lg:px-8 py-12">
+    <div ref={ref} className="w-full px-4 bg-white bg-gradient-to-b dark:from-[#3b1f80] dark:via-[#20124d] dark:to-[#3b1f80] sm:px-6 lg:px-8 ">
       <motion.form
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
         variants={fadeUp}
         onSubmit={handleSubmit}
-        className="flex flex-col items-center overflow-hidden  mx-auto   p-8 sm:p-12 text-black dark:text-white shadow-xl transition-shadow duration-300"
+        className="flex flex-col items-center rounded-xl overflow-hidden  mx-auto bg-black/20 dark:bg-white/0  p-8 sm:p-12 text-black dark:text-white  transition-shadow duration-300"
         aria-label="Contact form"
       >
         {/* Header */}
