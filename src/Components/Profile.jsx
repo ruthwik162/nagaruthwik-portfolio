@@ -1,130 +1,180 @@
-import React from 'react';
+import React, { useRef , useEffect } from 'react';
 import { assets } from '../assets/assets';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiDownload, FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone, FiTwitter } from 'react-icons/fi';
 import { SiHackerrank, SiLeetcode } from 'react-icons/si';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import StarBackground from '../ThemeContext/StarBackground';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Profile = () => {
     const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: false });
+    const homeRef = useRef();
+    const cursorRef = useRef();
+    const nameContainerRef = useRef();
 
+    // Enhanced animation variants with spring physics
     const fadeUp = (delay = 0) => ({
-        hidden: { y: 40, opacity: 0 },
+        hidden: { y: 40, opacity: 0, filter: 'blur(4px)' },
         visible: {
             y: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             transition: {
                 delay,
                 duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+                ease: [0.16, 1, 0.3, 1]
             }
         }
     });
+
     const fadeRotate = (delay = 0) => ({
-        hidden: { x: 100, opacity: 0 },
+        hidden: { x: 100, opacity: 0, rotate: 5, filter: 'blur(4px)' },
         visible: {
             x: 0,
             opacity: 1,
+            rotate: 0,
+            filter: 'blur(0px)',
             transition: {
                 delay,
                 duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+                ease: [0.16, 1, 0.3, 1]
             }
         }
     });
-    const fadeRotateLeft = (delay = 0) => ({
-        hidden: { y: 50, opacity: 0 },
+
+    const fadeRotateDown = (delay = 0) => ({
+        hidden: { y: 20, opacity: 0, rotate: 5, filter: 'blur(4px)' },
         visible: {
             y: 0,
-            opacity: 1.2,
+            opacity: 1,
+            rotate: 0,
+            filter: 'blur(0px)',
             transition: {
                 delay,
                 duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99]
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    });
+
+    const fadeRotateLeft = (delay = 0) => ({
+        hidden: { x: -50, opacity: 0, rotate: -5, scale: 1.3, filter: 'blur(4px)' },
+        visible: {
+            x: 0,
+            opacity: 1,
+            rotate: 0,
+            scale: 1,
+            filter: 'blur(0px)',
+            transition: {
+                delay,
+                duration: 0.8,
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+                ease: [0.16, 1, 0.3, 1]
             }
         }
     });
 
     const fadeRight = {
-        hidden: {
-            y: 80,
-            opacity: 0,
-        },
+        hidden: { x: -40, opacity: 0, filter: 'blur(4px)' },
         visible: (i) => ({
-            y: 0,
+            x: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             transition: {
                 delay: 0.8 + i * 0.1,
                 duration: 0.6,
                 type: "spring",
-                stiffness: 60,
-                damping: 14,
+                stiffness: 100,
+                damping: 12,
             },
         }),
     };
+
     const fadeDown = (delay = 0) => ({
-        hidden: {
-            y: -40,
-            opacity: 0,
-        },
+        hidden: { y: -20, opacity: 0, filter: 'blur(4px)' },
         visible: {
             y: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             transition: {
                 delay,
                 duration: 0.6,
-                ease: [0.6, -0.05, 0.01, 0.99],
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+                ease: [0.16, 1, 0.3, 1],
             },
         },
     });
 
-
     const fadeLeft = {
-        hidden: {
-            x: -80,
-            opacity: 0,
-        },
+        hidden: { x: -40, opacity: 0, filter: 'blur(4px)' },
         visible: {
             x: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             transition: {
                 type: "spring",
-                stiffness: 60,
-                damping: 14,
-                delay: 0.1, // optional: fine-tune or remove
+                stiffness: 100,
+                damping: 12,
+                delay: 0.1,
             }
         }
     };
 
-
     const imageVariants = {
-        hidden: { opacity: 0, scale: 0.95 },
+        hidden: { opacity: 0, scale: 0.95, y: 20, filter: 'blur(4px)' },
         visible: {
             opacity: 1,
             scale: 1,
+            y: 0,
+            filter: 'blur(0px)',
             transition: {
                 delay: 0.5,
                 duration: 1,
                 type: "spring",
-                damping: 10
+                damping: 12,
+                stiffness: 100
             }
         },
         hover: {
-            scale: 1.05,
-            rotate: 1,
+            scale: 1.03,
+            y: -5,
             transition: {
                 type: "spring",
-                stiffness: 300
+                stiffness: 400
             }
         }
     };
 
     const statVariant = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
         visible: (i) => ({
             opacity: 1,
             y: 0,
-            transition: { delay: 0.8 + i * 0.1, duration: 0.6 }
+            filter: 'blur(0px)',
+            transition: {
+                delay: 0.8 + i * 0.1,
+                duration: 0.6,
+                type: "spring",
+                stiffness: 100,
+                damping: 12
+            }
         })
     };
 
@@ -133,246 +183,326 @@ const Profile = () => {
         { icon: <FiLinkedin />, url: "https://linkedin.com/in/nagaruthwikmerugu", label: "LinkedIn", color: "text-blue-600 dark:text-blue-400" },
         { icon: <FiTwitter />, url: "https://twitter.com", label: "Twitter", color: "text-sky-500 dark:text-sky-400" },
         { icon: <SiLeetcode />, url: "https://leetcode.com", label: "LeetCode", color: "text-amber-600 dark:text-amber-400" },
-        { icon: <SiHackerrank />, url: "https://www.hackerrank.com/profile/nagaruthwikmeru1", label: "LeetCode", color: "text-amber-600 dark:text-amber-400" }
-
+        { icon: <SiHackerrank />, url: "https://www.hackerrank.com/profile/nagaruthwikmeru1", label: "HackerRank", color: "text-green-600 dark:text-green-400" }
     ];
+
     const contactLinks = [
         {
             href: "mailto:nagaruthwikmerugu162@gmail.com",
             label: "Email",
             icon: <FiMail className="text-indigo-600 dark:text-indigo-400" />,
-            classes: "bg-black/20 dark:bg-white/20 text-black dark:text-white",
+            classes: "bg-black/20 dark:bg-white/20 text-black dark:text-white hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600",
         },
         {
             href: "tel:+919182216089",
             label: "+91 91822 16089",
             icon: <FiPhone className="text-green-600 dark:text-green-400" />,
-            classes: "bg-black/20 dark:bg-white/20 text-black dark:text-white text-[3vw] md:text-[1vw]",
+            classes: "bg-black/20 dark:bg-white/20 text-black dark:text-white hover:bg-green-600 hover:text-white dark:hover:bg-green-600",
         },
         {
-            href: "https://drive.google.com/file/d/1OE-B7-Kz7AurNWbsBh4zVo9yxRJ6sUUE/view",
-            label: "Download Resume",
-            icon: <FiDownload className="text-lg" />,
-            classes: "bg-black/40 dark:bg-white/20 text-white text-[3vw] md:text-[1vw]",
+            href: assets.resume,
+            label: "Download CV",
+            icon: <FiDownload className="text-indigo-600 dark:text-indigo-400" />,
+            classes: "bg-indigo-600 text-white hover:bg-indigo-700",
             target: "_blank",
             rel: "noopener noreferrer"
         }
     ];
 
+    // Cursor follower effect for name hover
+    const handleMouseMove = (e) => {
+        if (cursorRef.current && nameContainerRef.current) {
+            const rect = nameContainerRef.current.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            cursorRef.current.style.transform = `translate(${x - 15}px, ${y - 15}px)`;
+            cursorRef.current.style.opacity = '1';
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (cursorRef.current) {
+            cursorRef.current.style.opacity = '0';
+        }
+    };
+
+    useEffect(() => {
+        // Hero section parallax effect
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: homeRef.current,
+                start: 'top top',
+                end: 'bottom 10%',
+                scrub: 1,
+            },
+        });
+
+        tl.to(homeRef.current, {
+            y: -100,
+            opacity: 0.8,
+            scale: 0.95,
+            ease: 'power2.out',
+        });
+
+        if (nameContainerRef.current) {
+            nameContainerRef.current.addEventListener('mousemove', handleMouseMove);
+            nameContainerRef.current.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        return () => {
+            if (nameContainerRef.current) {
+                nameContainerRef.current.removeEventListener('mousemove', handleMouseMove);
+                nameContainerRef.current.removeEventListener('mouseleave', handleMouseLeave);
+            }
+        };
+    }, []);
 
     return (
         <div
             ref={ref}
-            className="relative px-6 py-10 md:py-20 md:px-16 lg:px-32 bg-white bg-gradient-to-b dark:from-[#0f0621] dark:via-[#20124d] dark:to-[#3b1f80] text-black dark:text-white overflow-hidden"
+            className="relative px-4 md:pt-80 pt-40 md:pb-20 md:px-10 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden"
         >
+            <StarBackground />
+
             {/* Background overlays */}
             <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-5 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-100/20 dark:to-indigo-900/10 pointer-events-none" />
+            
+            {/* Custom cursor follower for name hover */}
+            <div 
+                ref={cursorRef}
+                className="fixed w-8 h-8 rounded-full bg-indigo-400/30 border-2 border-indigo-400 pointer-events-none z-20 opacity-0 transition-opacity duration-300 mix-blend-exclusion"
+                style={{ transform: 'translate(-50%, -50%)' }}
+            />
 
-            {/* Main content */}
-            <div className="relative z-10 max-w-7xl mx-auto">
-                <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-10 md:mt-20 gap-10">
-                    {/* Textual Info */}
-                    <div className="space-y-4 md:mt-20 md:space-y-8">
-
-                        <div className='flex flex-col items-center  transform -translate-x-16 md:items-center justify-center md:justify-center gap-6'>
-                            <motion.h1
-                                initial="hidden"
-                                animate={inView ? "visible" : "hidden"}
-                                style={{ textShadow: " 0_0_150px_rgba(250,200,50,0.3)" }}
-
-
-                                className="text-4xl sm:text-6xl  md:text-7xl font-bold  transform -translate-x-20 items-stretch justify-start  uppercase gap-5 ml-4 sm:ml-12 -mt-2 sm:-mt-6 tracking-tighter flex flex-wrap"
-                            >
-                                {"Merugu".split("").map((char, index) => (
-                                    <motion.span
-                                        key={index}
-                                        variants={fadeRotateLeft(0.14 * index)}
-                                        className="inline-block  "
+            <div ref={homeRef} className="max-w-7xl mx-auto relative z-10">
+                <div className="code-card w-full p-4 rounded-2xl border border-white/60 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm">
+                    <div className="p-6 bg-gray-100 dark:bg-gray-800/90 rounded-xl shadow-md">
+                        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+                            {/* Text Content */}
+                            <div className="flex-1 space-y-6 md:space-y-8">
+                                {/* Name */}
+                                <div 
+                                    ref={nameContainerRef}
+                                    className="space-y-2 relative"
+                                >
+                                    <motion.h1
+                                        initial="hidden"
+                                        animate={inView ? "visible" : "hidden"}
+                                        className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight flex flex-wrap"
                                     >
-                                        {char === " " ? "\u00A0" : char}
-                                    </motion.span>
-                                ))}
-                            </motion.h1>
+                                        {"Merugu".split("").map((char, index) => (
+                                            <motion.span
+                                                key={index}
+                                                variants={fadeRotateLeft(0.07 * index)}
+                                                className="inline-block hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300"
+                                                whileHover={{ 
+                                                    y: -5,
+                                                    scale: 1.1,
+                                                    color: '#818cf8'
+                                                }}
+                                            >
+                                                {char === " " ? "\u00A0" : char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.h1>
 
-                            <motion.h2
-                                initial="hidden"
-                                animate={inView ? "visible" : "hidden"}
-                                className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase ml-4 sm:ml-12 -mt-2 sm:-mt-6 tracking-tighter flex flex-wrap"
-                            >
-                                {"Naga Ruthwik".split("").map((char, index) => (
-                                    <motion.span
-                                        key={index}
-                                        variants={fadeRotate(0.09 * index)}
-                                        className="inline-block"
+                                    <motion.h2
+                                        initial="hidden"
+                                        animate={inView ? "visible" : "hidden"}
+                                        className="text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight flex flex-wrap"
                                     >
-                                        {char === " " ? "\u00A0" : char}
-                                    </motion.span>
-                                ))}
-                            </motion.h2>
-                        </div>
+                                        {"Naga Ruthwik".split("").map((char, index) => (
+                                            <motion.span
+                                                key={index}
+                                                variants={fadeRotate(0.05 * index)}
+                                                className="inline-block hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300"
+                                                whileHover={{ 
+                                                    y: -5,
+                                                    scale: 1.1,
+                                                    color: '#818cf8'
+                                                }}
+                                            >
+                                                {char === " " ? "\u00A0" : char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.h2>
 
+                                    {/* Decorative elements */}
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 1.5, duration: 0.8 }}
+                                        className="absolute -bottom-6 -left-10 w-24 h-24 rounded-full bg-indigo-500/10 blur-xl z-0"
+                                    />
+                                </div>
 
-                        {/* Contact Buttons */}
-                        <motion.div
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={fadeLeft}
-                            custom={0.3}
-                            className="grid grid-cols-2  md:flex md:flex-row items-center justify-center md:justify-start gap-2 mt-4"
-                        >
-                            {contactLinks.map((link, index) => (
-                                <motion.a
-                                    key={index}
-                                    href={link.href}
-                                    target={link.target}
-                                    rel={link.rel}
-                                    custom={index}
+                                {/* Contact Buttons */}
+                                <motion.div
                                     initial="hidden"
                                     animate={inView ? "visible" : "hidden"}
-                                    variants={fadeRight} // or fadeLeft
-                                    aria-label={link.label}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${link.classes}`}
+                                    variants={fadeLeft}
+                                    className="grid grid-cols-2 md:flex md:flex-wrap gap-3"
                                 >
-                                    {link.icon}
-                                    <span>{link.label}</span>
-                                </motion.a>
-                            ))}
+                                    {contactLinks.map((link, index) => (
+                                        <motion.a
+                                            key={index}
+                                            href={link.href}
+                                            target={link.target}
+                                            rel={link.rel}
+                                            custom={index}
+                                            initial="hidden"
+                                            animate={inView ? "visible" : "hidden"}
+                                            variants={fadeRight}
+                                            className={`flex items-center gap-2 md:px-4 px-1 justify-center py-2 rounded-lg transition-all hover:scale-[1.02] ${link.classes}`}
+                                            whileHover={{ y: -2 }}
+                                        >
+                                            {link.icon}
+                                            <span className="text-sm md:text-base whitespace-nowrap">{link.label}</span>
+                                        </motion.a>
+                                    ))}
 
+                                    <motion.div
+                                        custom={contactLinks.length}
+                                        initial="hidden"
+                                        animate={inView ? "visible" : "hidden"}
+                                        variants={fadeRight}
+                                        className="flex items-center gap-2 bg-black/20 dark:bg-white/20 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white dark:hover:bg-red-600 transition-colors"
+                                    >
+                                        <FiMapPin className="text-red-600 dark:text-red-400" />
+                                        <span className="text-sm md:text-base">Hyderabad, Telangana</span>
+                                    </motion.div>
+                                </motion.div>
+
+                                {/* Social Links */}
+                                <motion.div
+                                    initial="hidden"
+                                    animate={inView ? "visible" : "hidden"}
+                                    variants={fadeDown(0.5)}
+                                    className="flex gap-4 md:gap-5"
+                                >
+                                    {socialLinks.map(({ icon, url, label, color }, index) => (
+                                        <motion.a
+                                            key={index}
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={label}
+                                            custom={index}
+                                            initial="hidden"
+                                            animate={inView ? "visible" : "hidden"}
+                                            variants={fadeDown(0.3 + index * 0.1)}
+                                            whileHover={{ y: -5, scale: 1.1 }}
+                                            className={`p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all ${color}`}
+                                        >
+                                            {icon}
+                                        </motion.a>
+                                    ))}
+                                </motion.div>
+                            </div>
+
+                            {/* Profile Image */}
                             <motion.div
-                                custom={contactLinks.length}
                                 initial="hidden"
                                 animate={inView ? "visible" : "hidden"}
-                                variants={fadeRight}
-                                className="flex items-center gap-2 bg-black/20 dark:bg-white/20 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg cursor-default"
+                                variants={imageVariants}
+                                whileHover="hover"
+                                className="relative group shrink-0"
                             >
-                                <FiMapPin className="text-red-600 dark:text-red-400" />
-                                <span className="text-[2vw] md:text-[1vw]">Hyderabad, Telangana</span>
-                            </motion.div>
-
-                        </motion.div>
-
-
-                        {/* Social Links */}
-                        <div className="flex gap-7 md:gap-7  mt-3">
-                            {socialLinks.map(({ icon, url, label, color }, index) => (
-                                <motion.a
-                                    key={index}
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={label}
-                                    whileHover={{ scale: 1.3 }}
-                                    initial="hidden"
-                                    animate={inView ? "visible" : "hidden"}
-                                    variants={fadeDown(0.3 + index * 0.1)}
-
-
-                                    className={`p-2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 ${color} hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors`}
+                                <div className="rounded-xl shadow-[0_0_100px_rgba(250,200,50,0.2)] dark:shadow-[0_0_70px_rgba(124,58,237,0.3)] overflow-hidden relative">
+                                    <img
+                                        src={assets.profile}
+                                        alt="Naga Ruthwik Merugu"
+                                        className="h-60 w-48 md:h-80 md:w-64 object-cover rounded-xl"
+                                    />
+                                    <div className="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-indigo-300/40 transition-all duration-300 pointer-events-none" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </div>
+                                <motion.div
+                                    className="absolute -bottom-3 -right-3 bg-indigo-600 text-white px-3 py-1 rounded-full shadow-md text-xs md:text-sm font-medium flex items-center gap-1 z-10"
+                                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                                    animate={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        y: 0,
+                                        transition: { delay: 1.2, type: "spring", stiffness: 300 }
+                                    }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
                                 >
-                                    {icon}
-                                </motion.a>
-                            ))}
+                                    <motion.span
+                                        className="h-2 w-2 bg-green-400 rounded-full"
+                                        animate={{
+                                            scale: [0.8, 1.2, 0.8],
+                                            opacity: [0.6, 1, 0.6],
+                                            boxShadow: ['0 0 0 0 rgba(74, 222, 128, 0)', '0 0 5px 2px rgba(74, 222, 128, 0.7)', '0 0 0 0 rgba(74, 222, 128, 0)']
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    />
+                                    Available
+                                </motion.div>
+                            </motion.div>
                         </div>
 
                         {/* Description */}
-
-                    </div>
-
-                    {/* Profile Image */}
-                    <motion.div
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={imageVariants}
-                        whileHover="hover"
-                        className="relative group"
-                    >
-                        <div className="rounded-xl shadow-[0_0_150px_rgba(250,200,50,0.3)] dark:shadow-[0_0_70px_rgba(124,58,237,20)] overflow-hidden relative">
-                            <img
-                                src={assets.profile}
-                                alt="Naga Ruthwik Merugu"
-                                className="h-52 w-44 md:h-80 md:w-72 object-cover rounded-xl shadow-lg dark:shadow-gray-800/40"
-                            />
-                            <div className="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-indigo-300/40 transition-all duration-300 pointer-events-none" />
-                        </div>
-                        <motion.div
-                            className="absolute -bottom-4 -right-4 bg-indigo-600 text-white px-4 py-1.5 rounded-full shadow-md text-sm font-medium flex items-center gap-2"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                transition: { delay: 1.2, type: "spring" }
-                            }}
-                            whileHover={{ scale: 1.05 }}
-                        >
-                            <motion.span
-                                className="h-2 w-2 bg-green-400 rounded-full shadow-green-glow"
-                                animate={{
-                                    scale: [0.5, 1, 0.5],
-                                    opacity: [0.4, 1, 0.4],
-                                }}
-                                transition={{
-                                    duration: 2.2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                            />
-                            Available
-                        </motion.div>
-                    </motion.div>
-                </div>
-                <motion.p
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                    className="max-w-4xl font-poppins text-sm sm:text-lg text-gray-950 dark:text-gray-300 mt-4 flex flex-wrap gap-1"
-                >
-                    {"I’m a passionate Full Stack Developer with experience building responsive, scalable web apps using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. I'm currently pursuing a B.Tech in Computer Science at Malla Reddy University. Right now, I'm also doing an internship (May 25 – August 25, 2025), where I'm gaining real-world experience and improving my development skills."
-                        .split(" ")
-                        .map((word, index) => (
-                            <motion.span
-                                key={index}
-                                variants={fadeRotate(0.05 * index)}
-                                className="inline-block"
-                            >
-                                {word}&nbsp;
-                            </motion.span>
-                        ))}
-                </motion.p>
-
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-                    {[
-                        { value: "1+", label: "Years Experience" },
-                        { value: "10+", label: "Projects Completed" },
-                        { value: "100%", label: "Client Satisfaction" },
-                        { value: "Full-Stack", label: "Specialization" }
-                    ].map((stat, i) => (
-                        <motion.div
-                            key={i}
-                            custom={i}
+                        <motion.p
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            variants={statVariant}
-                            className="bg-black/20 dark:bg-white/20 backdrop-blur p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-all text-center"
+                            className="mt-8 md:mt-10 text-gray-700 dark:text-gray-300 text-sm md:text-md leading-relaxed"
                         >
-                            <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{stat.value}</h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</p>
-                        </motion.div>
-                    ))}
-                </div>
+                            {"I'm a passionate Full Stack Developer with experience building responsive, scalable web apps using React.js, Spring Boot, the MERN stack, HTML, CSS, JavaScript, and MySQL. I'm currently pursuing a B.Tech in Computer Science at Malla Reddy University. Right now, I'm also doing an internship (May 25 – August 25, 2025), where I'm gaining real-world experience and improving my development skills."
+                                .split(" ")
+                                .map((word, index) => (
+                                    <motion.span
+                                        key={index}
+                                        variants={fadeRotateDown(0.03 * index)}
+                                        className="inline-block hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-100"
+                                    >
+                                        {word}&nbsp;
+                                    </motion.span>
+                                ))}
+                        </motion.p>
 
-                {/* Divider */}
-                <motion.div
-                    initial={{ scaleX: 0 }}
-                    animate={inView ? { scaleX: 1 } : {}}
-                    transition={{ delay: 1.2, duration: 0.8 }}
-                    className="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent w-full mt-10 md:mt-12 origin-left"
-                />
+                        {/* Stats */}
+                        <motion.div
+                            initial="hidden"
+                            animate={inView ? "visible" : "hidden"}
+                            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 md:mt-12"
+                        >
+                            {[
+                                { value: "1+", label: "Years Experience" },
+                                { value: "10+", label: "Projects Completed" },
+                                { value: "100%", label: "Client Satisfaction" },
+                                { value: "Full-Stack", label: "Specialization" }
+                            ].map((stat, i) => (
+                                <motion.div
+                                    key={i}
+                                    custom={i}
+                                    variants={statVariant}
+                                    className="bg-black/20 dark:bg-white/20 backdrop-blur-sm p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all text-center"
+                                    whileHover={{ y: -5 }}
+                                >
+                                    <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{stat.value}</h3>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{stat.label}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
             </div>
+
+            {/* Divider */}
+            <motion.div
+                initial={{ scaleX: 0 }}
+                animate={inView ? { scaleX: 1 } : {}}
+                transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent w-full mt-10 md:mt-12 origin-left"
+            />
         </div>
     );
 };
 
 export default Profile;
-

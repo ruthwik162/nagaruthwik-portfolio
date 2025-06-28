@@ -5,6 +5,9 @@ import tailwind from './Tailwind.png'
 import javascript from './JavaScript.png'
 import profile from './Ruthwik Profile.jpg'
 import spring from './Springboot.png'
+import mainbanner from '../assets/Mainbanner.jpeg';
+import resume from './Nagaruthwik_Full_Stack_resume.pdf'
+import hostel from './hostel.png'
 
 export const assets={
     express,
@@ -13,9 +16,17 @@ export const assets={
     react,
     tailwind,
     javascript,
-    profile
+    profile,
+    mainbanner,
+    resume,
+    hostel
 
 }
+export const pdf=[
+
+]
+
+
 
 export const dummyImages=[
     {

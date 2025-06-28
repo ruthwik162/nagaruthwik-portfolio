@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "./ThemeContext";
-import { FiSun, FiMoon } from "react-icons/fi"; // Line icons
-import { motion, AnimatePresence } from "framer-motion"; // For smooth transitions
+import { FiSun, FiMoon } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ThemeToggle = () => {
   const { darkMode, setDarkMode } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setDarkMode(!darkMode);
+      }}
       aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
       className={`
         relative w-10 h-10 flex items-center justify-center
@@ -30,9 +40,9 @@ const ThemeToggle = () => {
           className="absolute"
         >
           {darkMode ? (
-            <FiMoon className={`w-5 h-5 ${darkMode ? "text-blue-300" : "text-gray-700"}`} />
+            <FiMoon className="w-5 h-5 text-blue-300" />
           ) : (
-            <FiSun className={`w-5 h-5 ${darkMode ? "text-gray-300" : "text-amber-500"}`} />
+            <FiSun className="w-5 h-5 text-amber-500" />
           )}
         </motion.div>
       </AnimatePresence>
