@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { FiExternalLink, FiGithub } from 'react-icons/fi';
 import StarBackground from '../ThemeContext/StarBackground';
 import { assets } from '../assets/assets';
+import { useTheme } from '../ThemeContext/ThemeContext';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,46 +19,50 @@ const Projects = () => {
     const markersRef = useRef([]);
     const projectContainerRef = useRef();
     const lineProgressRef = useRef();
+    const { expandedDescriptions, toggleDescription } = useTheme();
+
 
     const projects = [
-  {
-    title: "E-Commerce Platform",
-    description:
-      "A full-featured e-commerce platform with a React frontend, Node.js backend, and MongoDB database. Implemented payment processing with Stripe API and user authentication with JWT.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe API", "JWT"],
-    github: "https://github.com/yourusername/ecommerce-platform",
-    liveDemo: "https://yourecommerceapp.com",
-    image: assets.teacher
-  },
-  {
-    title: "Teacher-Student Appointment",
-    description:
-      "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
-    technologies: ["Next.js", "Sanity.io", "GSAP", "Framer Motion", "SEO"],
-    github: "https://github.com/yourusername/teacher-student-appointment",
-    liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
-    image: assets.mainbanner
-  },
-  {
-    title: "Hostel Management Web Application",
-    description:
-      "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
-    technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security"],
-    github: "https://github.com/yourusername/hostel-management",
-    liveDemo: "https://ruthwik162.github.io/malla-reddy-university/",
-    image: assets.hostel
-  },
-  {
-    title: "Weather Dashboard",
-    description:
-      "Interactive weather application with a 5-day forecast using the OpenWeatherMap API, geolocation services, and animated weather visuals based on current conditions.",
-    technologies: ["JavaScript", "API Integration", "CSS3", "HTML5", "Geolocation"],
-    github: "https://github.com/yourusername/weather-app",
-    liveDemo: "https://yourweatherapp.com",
-    image: "/images/weather.jpg"
-  }
-];
+        {
+            title: "E-Commerce Platform",
+            description:
+                "A full-stack e-commerce web application built with a modern MERN stack (MongoDB, Express.js, React, Node.js). This platform allows users to browse products, manage their carts, and securely purchase items using integrated Stripe payment processing. Implemented robust user authentication using JWT tokens, including secure cookie-based login sessions. Admin panel functionality enables product management, order tracking, and user role assignments. The project emphasizes scalable architecture, reusable components, and secure backend practices.",
+            features: [
+                "Responsive, modern UI built with React and Vite",
+                "User authentication and authorization using JWT",
+                "Secure login/session management with HTTP-only cookies",
+                "Product listing, search, filter, and category-based browsing",
+                "Shopping cart with real-time item quantity updates",
+                "Stripe-integrated checkout and payment system",
+                "Admin dashboard for product and order management",
+                "MongoDB Atlas for scalable cloud database storage",
+                "Error handling, input validation, and loading states for better UX"
+            ],
+            technologies: ["React", "Vite", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Axios", "Tailwind CSS"],
+            github: "https://github.com/ruthwik162/e-commerce",
+            liveDemo: "https://e-commerce-ten-rose-60.vercel.app/",
+            image: assets.ecommers
+        },
 
+        {
+            title: "Teacher-Student Appointment",
+            description:
+                "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
+            technologies: ["Next.js", "Sanity.io", "GSAP", "Framer Motion", "SEO"],
+            github: "https://github.com/yourusername/teacher-student-appointment",
+            liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
+            image: assets.mainbanner
+        },
+        {
+            title: "Hostel Management Web Application",
+            description:
+                "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
+            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security"],
+            github: "https://github.com/yourusername/hostel-management",
+            liveDemo: "https://ruthwik162.github.io/malla-reddy-university/",
+            image: assets.hostel
+        }
+    ];
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -78,19 +84,21 @@ const Projects = () => {
             });
 
             // Vertical line animation
-            gsap.fromTo(lineRef.current, {
-                scaleY: 0
-            }, {
-                scaleY: 1,
-                transformOrigin: "top center",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: projectContainerRef.current,
-                    start: "top center",
-                    end: "bottom center",
-                    scrub: 1
+            gsap.fromTo(
+                lineRef.current,
+                { scaleY: 0 },
+                {
+                    scaleY: 1,
+                    transformOrigin: "top center",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: projectContainerRef.current,
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: 1,
+                    },
                 }
-            });
+            );
 
             // Line progress indicator
             gsap.to(lineProgressRef.current, {
@@ -100,8 +108,8 @@ const Projects = () => {
                     trigger: projectContainerRef.current,
                     start: "top center",
                     end: "bottom bottom",
-                    scrub: true
-                }
+                    scrub: true,
+                },
             });
 
             // Projects animation
@@ -161,7 +169,7 @@ const Projects = () => {
             </div>
             <StarBackground />
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-9xl md:px-24 mx-auto relative z-10">
                 <div className="text-center mb-16 md:mb-24">
                     <motion.h2
                         ref={titleRef}
@@ -179,117 +187,128 @@ const Projects = () => {
 
                 <div ref={projectContainerRef} className="relative">
                     {/* Vertical timeline line container */}
-                    <div className="absolute left-1/2 top-0 h-full w-0.5 transform -translate-x-1/2 z-0 overflow-hidden">
+                    <div className="absolute md:block hidden left-1/2 md:left-10 top-0 h-full w-0.5 transform -translate-x-1/2 md:translate-x-0 z-0 overflow-hidden">
                         {/* Static line */}
                         <div
                             ref={lineRef}
                             className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500/30 via-indigo-500 to-indigo-500/30"
-                        />
+                        >
                         {/* Animated progress line */}
                         <div
                             ref={lineProgressRef}
-                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500 to-purple-500 origin-top scale-y-0"
+                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500 to-purple-500/40 origin-top scale-y-0"
                         />
+                        </div>
                     </div>
 
                     {/* Starting circle */}
-                    <div className="absolute left-1/2 top-0 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-x-1/2" />
+                    <div className="absolute md:block hidden left-1/2 md:left-10 top-0 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-x-1/2 md:-translate-x-2" />
 
-                    <div className="space-y-28 md:space-y-32">
+                    <div className="space-y-12 md:space-y-12 ml-0 md:ml-20">
+
                         {projects.map((project, index) => (
                             <div
                                 key={index}
                                 ref={el => projectsRef.current[index] = el}
-                                className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+                                className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center relative z-10"
                             >
-                                {/* Project description (left side) */}
-                                <div className="md:col-span-5 md:col-start-2 relative z-10">
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
-                                        transition={{ delay: 0.2, duration: 0.8 }}
-                                        viewport={{ once: true, margin: "-100px" }}
-                                    >
-                                        <div className="relative">
-                                            <span className="text-sm font-mono text-indigo-600 dark:text-indigo-400">
-                                                Project {index + 1} of {projects.length}
-                                            </span>
-                                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mt-2 mb-4">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-gray-600 dark:text-gray-300 mb-6 whitespace-pre-line">
-                                                {project.description}
-                                            </p>
-
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                {project.technologies.map((tech, i) => (
-                                                    <motion.span
-                                                        key={i}
-                                                        whileHover={{ y: -3 }}
-                                                        whileTap={{ scale: 0.95 }}
-                                                        className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 text-xs font-medium rounded-full shadow-sm hover:shadow-md transition-all"
-                                                    >
-                                                        {tech}
-                                                    </motion.span>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex gap-4">
-                                                {project.github && (
-                                                    <motion.a
-                                                        href={project.github}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        whileHover={{ y: -3, scale: 1.03 }}
-                                                        whileTap={{ scale: 0.95 }}
-                                                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-sm hover:shadow-md"
-                                                    >
-                                                        <FiGithub className="text-lg" />
-                                                        <span>View Code</span>
-                                                    </motion.a>
-                                                )}
-                                                {project.liveDemo && (
-                                                    <motion.a
-                                                        href={project.liveDemo}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        whileHover={{ y: -3, scale: 1.03 }}
-                                                        whileTap={{ scale: 0.95 }}
-                                                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
-                                                    >
-                                                        <FiExternalLink className="text-lg" />
-                                                        <span>Live Demo</span>
-                                                    </motion.a>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                </div>
-
-                                {/* Timeline marker (center) */}
                                 <div
                                     ref={el => markersRef.current[index] = el}
-                                    className="hidden md:block absolute left-1/2 top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-x-1/2 -translate-y-1/2"
+                                    className="absolute -left-[15%]  md:-left-[3.7%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
                                 />
 
-                                {/* Project image (right side) */}
-                                <div className="md:col-span-5 md:col-start-7 relative">
-                                    <motion.div
-                                        className="project-image overflow-hidden rounded-2xl shadow-2xl hover:shadow-lg dark:hover:shadow-purple-500/20 transition-all duration-300"
-                                        whileHover={{ scale: 1.02 }}
-                                        transition={{ type: "spring", stiffness: 300 }}
-                                    >
-                                        <div className="relative h-64 md:h-80 w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden">
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                                <span className="text-white text-lg font-medium">{project.title}</span>
-                                            </div>
+                                {/* Project Image */}
+                                <motion.div
+                                    className="project-image md:col-span-2"
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.7 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                >
+                                    <div className="relative h-64 w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden">
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                            <span className="text-white text-lg font-medium">{project.title}</span>
                                         </div>
-                                    </motion.div>
+                                    </div>
+                                </motion.div>
+
+                                {/* Project Content */}
+                                <div className="md:col-span-3">
+                                    <span className="text-sm font-mono text-indigo-600 dark:text-indigo-400">
+                                        Project {index + 1} of {projects.length}
+                                    </span>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mt-2 mb-4">
+                                        {project.title}
+                                    </h3>
+                                    <p
+                                        className={`text-gray-600 dark:text-gray-300 mb-4 whitespace-pre-line transition-all cursor-pointer ${expandedDescriptions[index] ? '' : 'line-clamp-4'
+                                            }`}
+                                        onClick={() => toggleDescription(index)}
+                                    >
+                                        {project.description}
+                                    </p>
+
+                                    {!expandedDescriptions[index] ? (
+                                        <button
+                                            onClick={() => toggleDescription(index)}
+                                            className="text-indigo-600 dark:text-indigo-400 text-sm hover:underline mb-6"
+                                        >
+                                            Read more
+                                        </button>
+                                    ) : <button
+                                        onClick={() => toggleDescription(index)}
+                                        className="text-indigo-600 dark:text-indigo-400 text-sm hover:underline mb-6"
+                                    >
+                                        Read Less
+                                    </button>
+                                    }
+
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {project.technologies.map((tech, i) => (
+                                            <motion.span
+                                                key={i}
+                                                whileHover={{ y: -3 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 text-xs font-medium rounded-full shadow-sm hover:shadow-md transition-all"
+                                            >
+                                                {tech}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex gap-4">
+                                        {project.github && (
+                                            <motion.a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ y: -3, scale: 1.03 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-sm hover:shadow-md"
+                                            >
+                                                <FiGithub className="text-lg" />
+                                                <span>View Code</span>
+                                            </motion.a>
+                                        )}
+                                        {project.liveDemo && (
+                                            <motion.a
+                                                href={project.liveDemo}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ y: -3, scale: 1.03 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
+                                            >
+                                                <FiExternalLink className="text-lg" />
+                                                <span>Live Demo</span>
+                                            </motion.a>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         ))}

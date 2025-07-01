@@ -9,6 +9,7 @@ import Experience from "./Components/Experience";
 import Profile from "./Components/Profile";
 import Projects from "./Components/Projects";
 import Form from "./Components/Form";
+import Education from "./Components/Education";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       {/* Main sections with IDs for scrolling */}
       <section id="home"><Home /></section>
       <section id="profile"><Profile /></section>
+      <section id="education"><Education /></section>
       <section id="skill"><Skill /></section>
       <section id="experience"><Experience /></section>
       <section id="projects"><Projects /></section>
@@ -30,3 +32,4 @@ function App() {
 }
 
 export default App;
+

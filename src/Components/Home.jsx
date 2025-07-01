@@ -190,7 +190,7 @@ const Home = () => {
                     ease: 'power2.out',
                 })
                 .to(starsRef.current, {
-                    y: 50,
+                    y: 100,
                     ease: 'none'
                 }, 0);
             }, homeRef);
@@ -202,13 +202,13 @@ const Home = () => {
     return (
         <div
             ref={ref}
-            className="relative z-10 px-6 pt-10 min-h-screen md:pt-20 md:px-16 lg:px-32 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden flex flex-col justify-center"
+            className="relative z-10 px-6 pt-28 min-h-screen md:pt-20 md:px-16 lg:px-32 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden flex flex-col justify-center"
         >
             {/* Enhanced star background with twinkling animation */}
-            {/* <div
+            <div
                 ref={starsRef}
                 className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-            /> */}
+            />
             <StarBackground/>
             {/* Custom cursor follower for name hover */}
             

@@ -8,6 +8,7 @@ import spring from './Springboot.png'
 import mainbanner from '../assets/Mainbanner.jpeg';
 import resume from './Nagaruthwik_Full_Stack_resume.pdf'
 import hostel from './hostel.png'
+import ecommers from "./store_image.jpg"
 
 export const assets={
     express,
@@ -19,7 +20,8 @@ export const assets={
     profile,
     mainbanner,
     resume,
-    hostel
+    hostel,
+    ecommers
 
 }
 export const pdf=[

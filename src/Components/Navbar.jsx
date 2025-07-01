@@ -21,24 +21,43 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Profile", href: "#profile" },
+    { name: "Education", href: "#education" },
     { name: "Skills", href: "#skill" },
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
   ];
 
   const socialIcons = [
-    { icon: <FiInstagram />, color: "hover:text-pink-500", link: "#" },
-    { icon: <FiLinkedin />, color: "hover:text-blue-500", link: "#" },
-    { icon: <FiGithub />, color: "hover:text-gray-500", link: "#" },
-    { icon: <PiFile />, color: "hover:text-green-500", link: "#" },
+    {
+      icon: <FiGithub />,
+      link: "https://github.com/your-username",
+      color: "text-gray-700 dark:text-white"
+    },
+    {
+      icon: <FiLinkedin />,
+      link: "https://www.linkedin.com/in/your-linkedin",
+      color: "text-blue-700 dark:text-blue-400"
+    },
+    {
+      icon: <FiInstagram />,
+      link: "https://www.instagram.com/your-instagram",
+      color: "text-pink-600 dark:text-pink-400"
+    },
+    {
+      icon: <PiFile />,
+      link: "/resume.pdf", // or wherever your resume is hosted
+      color: "text-green-600 dark:text-green-400"
+    }
   ];
 
+
+
   const menuVariants = {
-    hidden: { 
+    hidden: {
       x: "-100vw",
       transition: { type: "spring", stiffness: 100, damping: 20 }
     },
-    visible: { 
+    visible: {
       x: 0,
       transition: { type: "spring", stiffness: 100, damping: 20 }
     }
@@ -54,20 +73,19 @@ const Navbar = () => {
   };
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 15 }}
-      className={`fixed top-0 left-0 w-full z-50 text-black dark:text-white px-4 md:px-16 lg:px-24 xl:px-32 py-4 transition-all duration-500 ${
-        scrolled 
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" 
+      className={`fixed top-0 left-0 w-full z-50 text-black dark:text-white px-4 md:px-16 lg:px-24 xl:px-32 py-4 transition-all duration-500 ${scrolled
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2">
-          <motion.h1 
+          <motion.h1
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="font-bold text-xl md:text-2xl lg:text-3xl"
@@ -89,7 +107,7 @@ const Navbar = () => {
                 className="group relative flex flex-col gap-0.5 text-black dark:text-white"
               >
                 {link.name}
-                <motion.div 
+                <motion.div
                   className="h-0.5 w-0 bg-current group-hover:w-full transition-all duration-300"
                   initial={{ width: 0 }}
                   whileHover={{ width: "100%" }}
@@ -97,24 +115,6 @@ const Navbar = () => {
               </a>
             </motion.div>
           ))}
-        </div>
-
-        {/* Desktop Icons + ThemeToggle */}
-        <div className="hidden md:flex items-center gap-4">
-          {socialIcons.map((item, i) => (
-            <motion.a
-              key={i}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className={`text-xl ${item.color} transition-colors duration-200`}
-            >
-              {item.icon}
-            </motion.a>
-          ))}
-
           <motion.div
             onClick={(e) => e.stopPropagation()}
 
@@ -122,6 +122,9 @@ const Navbar = () => {
             <ThemeToggle />
           </motion.div>
         </div>
+
+        {/* Desktop Icons + ThemeToggle */}
+
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 md:hidden">
@@ -209,7 +212,7 @@ const Navbar = () => {
             ))}
 
             {/* Mobile Social Icons */}
-            <motion.div 
+            <motion.div
               className="flex gap-6 mt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -232,11 +235,11 @@ const Navbar = () => {
 
             {/* Mobile Theme Toggle */}
             <motion.div
-            onClick={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
 
-          >
-            <ThemeToggle />
-          </motion.div>
+            >
+              <ThemeToggle />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

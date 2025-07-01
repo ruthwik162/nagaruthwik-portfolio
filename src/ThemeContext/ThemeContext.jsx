@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+
 const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
@@ -13,6 +14,15 @@ export const ThemeProvider = ({ children }) => {
   const handleMouseMove = (e, index = null) => {
     setHoveredIndex(index);
     setHoverPos({ x: e.clientX, y: e.clientY });
+  };
+
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
+
+  const toggleDescription = (index) => {
+    setExpandedDescriptions((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
 
   useEffect(() => {
@@ -30,9 +40,10 @@ export const ThemeProvider = ({ children }) => {
         hoveredIndex,
         hoverPos,
         handleMouseMove,
+        expandedDescriptions,
+        toggleDescription,
       }}
     >
-      {darkMode }
       {children}
     </ThemeContext.Provider>
   );
