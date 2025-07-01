@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import StarBackground from '../ThemeContext/StarBackground';
 import { FiSend, FiCheckCircle, FiInfo, FiMapPin, FiPhone, FiMail, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import { FaPaperPlane } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 // Animation variants
 const fadeUp = {
@@ -104,9 +105,10 @@ const Form = () => {
         setSubmitSuccess(true);
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setSubmitSuccess(false), 3000);
+        toast.success("Thank you! Your message has been sent successfully.")
       } catch (error) {
         console.error('Error submitting form:', error);
-        alert('Something went wrong. Please try again later.');
+        toast.error('Something went wrong. Please try again later.')
       } finally {
         setIsSubmitting(false);
       }

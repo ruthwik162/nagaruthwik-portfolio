@@ -10,12 +10,14 @@ import Profile from "./Components/Profile";
 import Projects from "./Components/Projects";
 import Form from "./Components/Form";
 import Education from "./Components/Education";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <ThemeProvider>
       <CursorTracker />
       <Navbar />
+      <Toaster/>
 
       {/* Main sections with IDs for scrolling */}
       <section id="home"><Home /></section>

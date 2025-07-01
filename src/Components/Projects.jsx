@@ -48,8 +48,8 @@ const Projects = () => {
             title: "Teacher-Student Appointment",
             description:
                 "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
-            technologies: ["Next.js", "Sanity.io", "GSAP", "Framer Motion", "SEO"],
-            github: "https://github.com/yourusername/teacher-student-appointment",
+            technologies: [ "MERN-Stack", "GSAP","Firebase", "Framer Motion", "SEO","Tailwind CSS"],
+            github: "https://github.com/ruthwik162/teacher-student-appointment",
             liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
             image: assets.mainbanner
         },
@@ -57,8 +57,8 @@ const Projects = () => {
             title: "Hostel Management Web Application",
             description:
                 "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
-            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security"],
-            github: "https://github.com/yourusername/hostel-management",
+            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security","Tailwind CSS"],
+            github: "https://github.com/ruthwik162/malla-reddy-university",
             liveDemo: "https://ruthwik162.github.io/malla-reddy-university/",
             image: assets.hostel
         }
@@ -214,7 +214,7 @@ const Projects = () => {
                             >
                                 <div
                                     ref={el => markersRef.current[index] = el}
-                                    className="absolute -left-[15%]  md:-left-[3.7%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
+                                    className="absolute -left-[15%]  md:-left-[4.01%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
                                 />
 
                                 {/* Project Image */}

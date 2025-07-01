@@ -91,7 +91,7 @@ const Home = () => {
     };
 
     const pulseGlow = {
-        initial: { 
+        initial: {
             boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.7)',
             scale: 0.98
         },
@@ -147,7 +147,7 @@ const Home = () => {
                 const rect = nameContainerRef.current.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 cursorRef.current.style.transform = `translate(${x - 15}px, ${y - 15}px)`;
                 cursorRef.current.style.opacity = '1';
             }
@@ -183,19 +183,19 @@ const Home = () => {
                         scrub: 1,
                     },
                 })
-                .to(homeRef.current, {
-                    y: -100,
-                    opacity: 0.8,
-                    scale: 0.95,
-                    ease: 'power2.out',
-                })
-                .to(starsRef.current, {
-                    y: 100,
-                    ease: 'none'
-                }, 0);
+                    .to(homeRef.current, {
+                        y: -100,
+                        opacity: 0.8,
+                        scale: 0.95,
+                        ease: 'power2.out',
+                    })
+                    .to(starsRef.current, {
+                        y: 100,
+                        ease: 'none'
+                    }, 0);
             }, homeRef);
 
-            
+
         }
     }, []);
 
@@ -209,20 +209,20 @@ const Home = () => {
                 ref={starsRef}
                 className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
             />
-            <StarBackground/>
+            <StarBackground />
             {/* Custom cursor follower for name hover */}
-            
+
 
             <div ref={homeRef}>
                 <div className='flex items-center flex-col md:flex-row gap-10 md:gap-20 justify-center'>
-                    <div 
+                    <div
                         ref={nameContainerRef}
                         className='flex flex-col items-center md:items-start transform md:-translate-x-16 justify-center md:gap-6 relative'
                     >
                         <motion.h1
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            className="text-4xl sm:text-6xl md:text-7xl font-bold transform md:-translate-x-20 uppercase tracking-tighter flex flex-wrap relative"
+                            className="text-4xl sm:text-6xl md:text-9xl font-bold transform md:-translate-x-0 uppercase tracking-tighter flex flex-wrap relative"
                             style={{
                                 textShadow: theme === 'dark'
                                     ? '0 0 10px rgba(124, 58, 237, 0.5)'
@@ -235,7 +235,7 @@ const Home = () => {
                                     custom={index}
                                     variants={fadeRotateLeftVariants}
                                     className="inline-block hover:text-indigo-400 transition-colors duration-300"
-                                    whileHover={{ 
+                                    whileHover={{
                                         y: -5,
                                         scale: 1.1,
                                         color: '#818cf8'
@@ -249,7 +249,7 @@ const Home = () => {
                         <motion.h2
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tighter flex flex-wrap"
+                            className="text-4xl sm:text-6xl md:text-9xl font-bold uppercase tracking-tighter flex flex-wrap"
                         >
                             {"Naga Ruthwik".split("").map((char, index) => (
                                 <motion.span
@@ -257,7 +257,7 @@ const Home = () => {
                                     custom={index}
                                     variants={fadeRotateVariants}
                                     className="inline-block hover:text-indigo-400 transition-colors duration-300"
-                                    whileHover={{ 
+                                    whileHover={{
                                         y: -5,
                                         scale: 1.1,
                                         color: '#818cf8'
@@ -269,7 +269,7 @@ const Home = () => {
                         </motion.h2>
 
                         {/* Decorative elements */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 1.5, duration: 0.8 }}
@@ -335,7 +335,7 @@ const Home = () => {
                         animate={inView ? "visible" : "hidden"}
                         className="max-w-4xl font-poppins text-sm sm:text-lg text-gray-700 dark:text-gray-300 flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start"
                     >
-                        {"Front End Development | FullStack Solutions | 3D Animations | UI/UX Design"
+                        {"Front End Development | FullStack Solutions | 3D Animations"
                             .split("|")
                             .map((word, index) => (
                                 <React.Fragment key={index}>
@@ -360,6 +360,39 @@ const Home = () => {
                             ))}
                     </motion.p>
 
+                    <motion.p
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        className="mt-8 text-sm sm:text-md md:text-lg font-light max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300"
+                        style={{
+                            textShadow: theme === 'dark'
+                                ? '0 0 10px rgba(124, 58, 237, 0.5)'
+                                : '0 0 5px rgba(250, 200, 50, 0.3)'
+                        }}
+                    >
+                        {`
+Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building scalable web applications using the MERN stack.
+    I enjoy solving real-world problems through clean code, intuitive UI/UX, and robust backend systems.
+    I’m currently seeking full-time or internship opportunities to contribute to impactful projects and grow with a tech-forward team.
+  `.split(" ").map((word, index) => (
+                            <motion.span
+                                key={index}
+                                custom={index}
+                                variants={fadeRotateLeftVariants}
+                                className="inline-block hover:text-indigo-400 transition-colors duration-300"
+                                whileHover={{
+                                    y: -5,
+                                    scale: 1.1,
+                                    color: '#818cf8'
+                                }}
+                            >
+                                {word}&nbsp;
+                            </motion.span>
+                        ))}
+                    </motion.p>
+
+
+
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{
@@ -369,24 +402,24 @@ const Home = () => {
                         }}
                         className="flex flex-wrap gap-4 mt-10 justify-center md:justify-start"
                     >
-                        <motion.a 
-                            href="#contact" 
+                        <motion.a
+                            href="#contact"
                             className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
                             whileHover={{ y: -3, scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
                             Contact Me <FiArrowRight className="inline" />
                         </motion.a>
-                        <motion.a 
-                            href="#projects" 
+                        <motion.a
+                            href="#projects"
                             className="flex items-center gap-2 px-8 py-3 border border-indigo-600 text-indigo-600 dark:text-white rounded-full hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors"
                             whileHover={{ y: -3, scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
                             View Projects
                         </motion.a>
-                        <motion.a 
-                            href={assets.resume} 
+                        <motion.a
+                            href={assets.resume}
                             download
                             className="flex items-center gap-2 px-8 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                             whileHover={{ y: -3, scale: 1.03 }}
