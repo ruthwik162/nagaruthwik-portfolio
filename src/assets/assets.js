@@ -9,6 +9,7 @@ import mainbanner from '../assets/Mainbanner.jpeg';
 import resume from './Nagaruthwik_Full_Stack_resume.pdf'
 import hostel from './hostel.png'
 import ecommers from "./store_image.jpg"
+import image from "./email_image.png"
 
 export const assets={
     express,
@@ -21,7 +22,8 @@ export const assets={
     mainbanner,
     resume,
     hostel,
-    ecommers
+    ecommers,
+    image
 
 }
 export const pdf=[

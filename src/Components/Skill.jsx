@@ -389,7 +389,7 @@ const Skill = () => {
             </div>
 
             {/* Image Grid + Tools */}
-            <div className="w-full md:w-full max-w-9xl flex flex-col items-center  justify-center md:flex-row gap-12 md:gap-32">
+            <div className="w-full md:w-full max-w-9xl flex flex-col  items-center  justify-center md:flex-row gap-12 md:gap-28">
               <motion.div
                 variants={fadeDown}
                 initial="hidden"
@@ -401,7 +401,7 @@ const Skill = () => {
                   <motion.div
                     key={index}
                     ref={(el) => (imagesRef.current[index] = el)}
-                    className="code-card w-full  p-2 rounded-md shadow-md "
+                    className="code-card w-full  p-2 md:p-4 rounded-md shadow-md "
                     whileHover={{
                       scale: 1.1,
                       rotate: [0, -5, 5, -5, 0],
@@ -412,7 +412,7 @@ const Skill = () => {
                       <motion.img
                         src={element.img}
                         alt={element.name}
-                        className="md:w-20  md:h-20 h-24 w-24 rounded-lg object-cover"
+                        className="md:w-20  md:h-20 h-24 w-24 dark:shadow-[0_0_70px_rgba(124,58,237,10)] rounded-lg object-cover"
                         whileHover={{ scale: 1.15 }}
                       />
                     </div>

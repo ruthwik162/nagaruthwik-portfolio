@@ -5,6 +5,7 @@ import StarBackground from '../ThemeContext/StarBackground';
 import { FiSend, FiCheckCircle, FiInfo, FiMapPin, FiPhone, FiMail, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import { FaPaperPlane } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { assets } from '../assets/assets';
 
 // Animation variants
 const fadeUp = {
@@ -162,8 +163,9 @@ const Form = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-5 mb-8">
-              <motion.div
+            <div className="space-y-5 flex items-center md:gap-28 justify-center mb-8">
+              <div>
+                <motion.div
                 className="flex items-start gap-3"
                 whileHover={{ x: 5 }}
               >
@@ -206,6 +208,11 @@ const Form = () => {
                   <p className="text-white text-sm md:text-base">Hyderabad, Telangana, India</p>
                 </div>
               </motion.div>
+              </div>
+              
+              <div className='rounded '>
+                <img src={assets.image} className='rounded-2xl' alt="" />
+              </div>
             </div>
 
             {/* Important Notes */}
