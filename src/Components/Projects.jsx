@@ -48,7 +48,7 @@ const Projects = () => {
             title: "Teacher-Student Appointment",
             description:
                 "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
-            technologies: [ "MERN-Stack", "GSAP","Firebase", "Framer Motion", "SEO","Tailwind CSS"],
+            technologies: ["MERN-Stack", "GSAP", "Firebase", "Framer Motion", "SEO", "Tailwind CSS"],
             github: "https://github.com/ruthwik162/teacher-student-appointment",
             liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
             image: assets.mainbanner
@@ -57,7 +57,7 @@ const Projects = () => {
             title: "Hostel Management Web Application",
             description:
                 "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
-            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security","Tailwind CSS"],
+            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security", "Tailwind CSS"],
             github: "https://github.com/ruthwik162/malla-reddy-university",
             liveDemo: "https://ruthwik162.github.io/malla-reddy-university/",
             image: assets.hostel
@@ -191,13 +191,13 @@ const Projects = () => {
                         {/* Static line */}
                         <div
                             ref={lineRef}
-                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500/30 via-indigo-500 to-indigo-500/30"
+                            className="h-full w-0.5 origin-top bg-gradient-to-b from-indigo-500/30 via-indigo-500 to-indigo-500/30 dark:shadow-[0_0_150px_rgba(99,102,241,0.2)] rounded-full transform"
                         >
-                        {/* Animated progress line */}
-                        <div
-                            ref={lineProgressRef}
-                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-500 to-purple-500/40 origin-top scale-y-0"
-                        />
+                            {/* Progress Line */}
+                            <div
+                                ref={lineProgressRef}
+                                className="absolute top-0 left-0 h-full w-1bg-gradient-to-b from-indigo-500 to-purple-500/40 rounded-full scale-y-0 origin-top"
+                            />
                         </div>
                     </div>
 
@@ -214,13 +214,13 @@ const Projects = () => {
                             >
                                 <div
                                     ref={el => markersRef.current[index] = el}
-                                    className="absolute -left-[15%]  md:-left-[4.01%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
+                                    className="absolute -left-[15%]  md:-left-[4.1%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
                                 />
 
                                 {/* Project Image */}
                                 <motion.div
                                     className="project-image md:col-span-2"
-                                    initial={{ opacity: 0, x: -30 }}
+                                    initial={{ opacity: 0, x: -60 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.7 }}
                                     viewport={{ once: true, margin: "-100px" }}

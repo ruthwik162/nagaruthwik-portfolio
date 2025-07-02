@@ -127,7 +127,7 @@ const Form = () => {
     <div
       id='contact'
       ref={ref}
-      className="relative w-full px-4 py-8 md:py-10 bg-white dark:bg-gradient-to-b dark:bg-[#0a0518] sm:px-6 lg:px-8 overflow-hidden"
+      className="relative w-full px-4 py-4 md:py-2 bg-white dark:bg-gradient-to-b dark:bg-[#0a0518] sm:px-6 lg:px-8 overflow-hidden"
     >
       <StarBackground />
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-5 pointer-events-none" />
@@ -136,13 +136,13 @@ const Form = () => {
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
         variants={fadeUp}
-        className="relative z-10 flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden mx-auto max-w-6xl bg-white/95 dark:bg-[#0f0a25] backdrop-blur-sm shadow-xl dark:shadow-[0_0_30px_rgba(124,58,237,0.2)] border border-gray-200 dark:border-gray-800"
+        className="relative z-10 flex flex-col text-sm lg:flex-row items-stretch rounded-2xl overflow-hidden mx-auto max-w-7xl bg-white/95 dark:bg-[#0f0a25] backdrop-blur-sm shadow-xl dark:shadow-[0_0_30px_rgba(124,58,237,0.2)] border border-gray-200 dark:border-gray-800"
         aria-label="Contact form"
       >
         {/* Left Panel - Contact Information */}
         <motion.div
           variants={fadeRight(0.2)}
-          className="relative w-full lg:w-2/5 bg-gradient-to-br from-indigo-600 to-purple-700 p-8 md:p-5 text-white flex flex-col overflow-hidden"
+          className="relative w-full lg:w-4/5 bg-gradient-to-br from-indigo-600 to-purple-700 p-4 md:p-5 text-white flex flex-col overflow-hidden"
         >
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full transform translate-x-1/4 -translate-y-1/4"></div>
@@ -221,6 +221,10 @@ const Form = () => {
                 </li>
                 <li className="flex items-start">
                   <FiCheckCircle className="text-green-400 mt-1 mr-2 flex-shrink-0 text-sm" />
+                  <span>We will send a confirmation email to you after we received you query</span>
+                </li>
+                <li className="flex items-start">
+                  <FiCheckCircle className="text-green-400 mt-1 mr-2 flex-shrink-0 text-sm" />
                   <span>We respond within 2-3 working days or as soon as possible</span>
                 </li>
                 <li className="flex items-start">
@@ -293,7 +297,7 @@ const Form = () => {
           ref={formRef}
           onSubmit={handleSubmit}
           variants={fadeRight(0.4)}
-          className="w-full lg:w-3/5 p-6 sm:p-8 md:p-10 text-black dark:text-white"
+          className="w-full lg:w-4/5 p-6 sm:p-8 md:p-10 text-black dark:text-white"
         >
           {/* Header */}
           <div className="w-full text-center mb-6 md:mb-8">

@@ -222,7 +222,7 @@ const Home = () => {
                         <motion.h1
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            className="text-4xl sm:text-6xl md:text-9xl font-bold transform md:-translate-x-0 uppercase tracking-tighter flex flex-wrap relative"
+                            className="text-4xl sm:text-6xl md:text-7xl font-bold transform md:-translate-x-0 uppercase tracking-tighter flex flex-wrap relative"
                             style={{
                                 textShadow: theme === 'dark'
                                     ? '0 0 10px rgba(124, 58, 237, 0.5)'
@@ -249,7 +249,7 @@ const Home = () => {
                         <motion.h2
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            className="text-4xl sm:text-6xl md:text-9xl font-bold uppercase tracking-tighter flex flex-wrap"
+                            className="text-4xl sm:text-6xl md:text-8xl font-bold uppercase tracking-tighter flex flex-wrap"
                         >
                             {"Naga Ruthwik".split("").map((char, index) => (
                                 <motion.span

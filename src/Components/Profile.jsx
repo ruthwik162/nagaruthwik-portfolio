@@ -306,21 +306,20 @@ const Profile = () => {
             <StarBackground />
 
             {/* Background overlays */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-5 pointer-events-none" />
+            <div className="absolute inset-0 bg-grid-pattern opacity-10  dark:opacity-5 pointer-events-none" />
 
             {/* Custom cursor follower for name hover */}
             <div
                 ref={cursorRef}
-                className="fixed w-8 h-8 rounded-full bg-indigo-400/30 border-2 border-indigo-400 pointer-events-none z-20 opacity-0 transition-opacity duration-300 mix-blend-exclusion"
+                className="fixed w-8 h-8 rounded-full bg-indigo-400/30 border-2 border-indigo-400 pointer-events-none z-20 opacity-0 transition-opacity duration-150 mix-blend-exclusion"
                 style={{ transform: 'translate(-50%, -50%)' }}
             />
 
             <div ref={homeRef} className="max-w-7xl mx-auto relative z-10">
-                <div ref={contentRef} className="code-card w-full p-4 rounded-2xl border border-white/60 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm">
+                <div ref={contentRef} className="code-card w-full p-4 rounded-2xl border border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm">
                     {/* Rest of your content remains exactly the same... */}
-                    <div className="p-6 bg-gray-100 dark:bg-gray-800/90 rounded-xl shadow-md">
                         {/* All your existing content */}
-                        <div className="p-6 bg-gray-100 dark:bg-gray-800/90 rounded-xl shadow-md">
+                        <div className="p-6 bg-gray-100 dark:bg-gray-900 dark:shadow-[0_0_70px_rgba(124,58,237,10)] rounded-xl shadow-md">
                             <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
                                 {/* Text Content */}
                                 <div className="flex-1 space-y-6 md:space-y-8">
@@ -376,7 +375,7 @@ const Profile = () => {
                                             initial={{ opacity: 0, scale: 0.5 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 1.5, duration: 0.8 }}
-                                            className="absolute -bottom-6 -left-10 w-24 h-24 rounded-full bg-indigo-500/10 blur-xl z-0"
+                                            className="absolute -bottom-6 -left-10 w-24 h-24 dark:shadow-[0_0_90px_rgba(124,58,237,10)] rounded-full bg-indigo-500/30 blur-xl z-0"
                                         />
                                     </div>
 
@@ -533,7 +532,6 @@ const Profile = () => {
                                     </motion.div>
                                 ))}
                             </motion.div>
-                        </div>
                     </div>
                 </div>
             </div>

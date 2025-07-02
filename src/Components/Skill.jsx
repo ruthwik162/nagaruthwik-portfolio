@@ -373,7 +373,7 @@ const Skill = () => {
                                 {skill.level}%
                               </span>
                             </div>
-                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="w-full bg-gray-200  dark:bg-gray-700 rounded-full h-2">
                               <div
                                 className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full"
                                 style={{ width: `${skill.level}%` }}
@@ -389,26 +389,26 @@ const Skill = () => {
             </div>
 
             {/* Image Grid + Tools */}
-            <div className="w-full md:w-full max-w-9xl flex flex-col items-center justify-center md:flex-row gap-12 md:gap-32">
+            <div className="w-full md:w-full max-w-9xl flex flex-col items-center  justify-center md:flex-row gap-12 md:gap-32">
               <motion.div
                 variants={fadeDown}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
-                className="grid grid-cols-3 p-6 gap-6 rounded-xl border border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:border-white/60"
+                className="grid grid-cols-3 p-6 gap-6 rounded-xl border border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25  dark:border-white/60"
               >
                 {pic.map((element, index) => (
                   <motion.div
                     key={index}
                     ref={(el) => (imagesRef.current[index] = el)}
-                    className="code-card w-full bg-black/25 p-4 rounded-md shadow-md dark:shadow-[0_0_70px_rgba(124,58,237,10)]"
+                    className="code-card w-full  p-2 rounded-md shadow-md "
                     whileHover={{
                       scale: 1.1,
                       rotate: [0, -5, 5, -5, 0],
                       transition: { duration: 0.5 }
                     }}
                   >
-                    <div className="flex h-30 w-auto flex-col items-center justify-center overflow-hidden rounded-xl aspect-square">
+                    <div className="flex h-30 w-auto flex-col items-center dark:shadow-[0_0_70px_rgba(124,58,237,10)] justify-center overflow-hidden rounded-xl aspect-square">
                       <motion.img
                         src={element.img}
                         alt={element.name}
