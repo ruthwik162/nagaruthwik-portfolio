@@ -207,7 +207,8 @@ const Profile = () => {
             classes: "bg-black/20 dark:bg-white/20 text-black dark:text-white hover:bg-green-600 hover:text-white dark:hover:bg-green-600",
         },
         {
-            href: assets.resume,
+            href: assets.resume_fullstack,
+            
             label: "Download CV",
             icon: <FiDownload className="text-indigo-600 dark:text-indigo-400" />,
             classes: "bg-indigo-600 text-white hover:bg-indigo-700",
@@ -427,6 +428,7 @@ const Profile = () => {
                                             <motion.a
                                                 key={index}
                                                 href={url}
+                                                download
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 aria-label={label}

@@ -419,7 +419,7 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                             View Projects
                         </motion.a>
                         <motion.a
-                            href={assets.resume}
+                            href={assets.resume_fullstack}
                             download
                             className="flex items-center gap-2 px-8 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                             whileHover={{ y: -3, scale: 1.03 }}

@@ -10,6 +10,7 @@ import resume from './Nagaruthwik_Full_Stack_resume.pdf'
 import hostel from './hostel.png'
 import ecommers from "./store_image.jpg"
 import image from "./email_image.png"
+import resume_fullstack from "./Nagaruthwik_Fullstack_Resume.pdf"
 
 export const assets={
     express,
@@ -23,7 +24,8 @@ export const assets={
     resume,
     hostel,
     ecommers,
-    image
+    image,
+    resume_fullstack
 
 }
 export const pdf=[
