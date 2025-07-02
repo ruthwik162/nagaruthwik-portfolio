@@ -317,9 +317,7 @@ const Profile = () => {
             />
 
             <div ref={homeRef} className="max-w-7xl mx-auto relative z-10">
-                <div ref={contentRef} className="code-card w-full p-4 rounded-2xl border border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm">
-                    {/* Rest of your content remains exactly the same... */}
-                        {/* All your existing content */}
+                <div ref={contentRef} className="code-card w-full p-4 rounded-2xl border border-gray-300/60 bg-[#0a0615]/20 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm">
                         <div className="p-6 bg-gray-100 dark:bg-gray-900 dark:shadow-[0_0_70px_rgba(124,58,237,10)] rounded-xl shadow-md">
                             <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
                                 {/* Text Content */}

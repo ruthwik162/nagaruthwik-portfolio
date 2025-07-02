@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { motion, useAnimation } from 'framer-motion';
+import { delay, motion, scale, useAnimation } from 'framer-motion';
 import { assets } from '../assets/assets';
 import { useTheme } from '../ThemeContext/ThemeContext';
 import gsap from 'gsap';
@@ -93,22 +93,46 @@ const Home = () => {
     const pulseGlow = {
         initial: {
             boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.7)',
-            scale: 0.98
+            scale: 1
         },
         animate: {
             boxShadow: [
                 '0 0 0 0 rgba(124, 58, 237, 0.7)',
-                '0 0 20px 10px rgba(124, 58, 237, 0)',
-                '0 0 0 0 rgba(124, 58, 237, 0)'
+                '0 0 5px 50px rgba(124, 58, 237, 0)',
+                '0 0 10px 0 rgba(124, 58, 237, 0)'
             ],
             scale: 1,
             transition: {
-                duration: 2,
+                duration: 5,
                 repeat: Infinity,
-                repeatDelay: 1
+                repeatDelay: 1.2
             }
         }
     };
+
+    const buttonGlow = {
+        initial: {
+            boxShadow: `0 0 0 0 rgba(124, 58, 237, ${(0.6 + Math.random() * 0.4).toFixed(2)})`,
+            scale: 1
+        },
+        animate: {
+            boxShadow: [
+                `0 0 0 0 rgba(124, 58, 237, ${(0.6 + Math.random() * 0.4).toFixed(2)})`,
+                `0 0 5px ${Math.floor(Math.random() * 10 + 5)}px rgba(124, 58, 237, 0)`,
+                `0 0 10px 0 rgba(124, 58, 237, 0)`
+            ],
+            scale: [1, 1.02, 1],
+            transition: {
+                duration: +(2 + Math.random() * 8).toFixed(2), // 2–6s
+                delay: +(Math.random() * 1.5).toFixed(2),      // 0–1.5s
+                repeat: Infinity,
+                repeatDelay: +(Math.random() * 0.8).toFixed(2), // 0–0.8s
+                ease: "easeInOut"
+            }
+        }
+    };
+
+
 
     const profileShadow = theme === 'dark'
         ? '0 0 70px rgba(124, 58, 237, 0.5)'
@@ -202,7 +226,7 @@ const Home = () => {
     return (
         <div
             ref={ref}
-            className="relative z-10 px-6 pt-28 min-h-screen md:pt-20 md:px-16 lg:px-32 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden flex flex-col justify-center"
+            className="relative  z-10 px-2 pt-28 min-h-screen md:pt-20 md:px-16 lg:px-32 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden flex flex-col justify-center"
         >
             {/* Enhanced star background with twinkling animation */}
             <div
@@ -214,10 +238,10 @@ const Home = () => {
 
 
             <div ref={homeRef}>
-                <div className='flex items-center flex-col md:flex-row gap-10 md:gap-20 justify-center'>
+                <div className='flex items-center flex-col md:flex-row gap-3 md:gap-1 justify-center'>
                     <div
                         ref={nameContainerRef}
-                        className='flex flex-col items-center md:items-start transform md:-translate-x-16 justify-center md:gap-6 relative'
+                        className='flex flex-col items-start md:items-start transform md:-translate-x-16 justify-center md:gap-6 relative'
                     >
                         <motion.h1
                             initial="hidden"
@@ -249,7 +273,7 @@ const Home = () => {
                         <motion.h2
                             initial="hidden"
                             animate={inView ? "visible" : "hidden"}
-                            className="text-4xl sm:text-6xl md:text-8xl font-bold uppercase tracking-tighter flex flex-wrap"
+                            className="text-[47px] sm:text-6xl md:text-[120px] font-bold uppercase tracking-tighter flex flex-wrap"
                         >
                             {"Naga Ruthwik".split("").map((char, index) => (
                                 <motion.span
@@ -329,33 +353,41 @@ const Home = () => {
                     </motion.div>
                 </div>
 
-                <div className='px-4 md:px-20 mt-10 md:mt-16'>
+                <div className='px-4 md:px-10 mt-10 md:mt-1'>
                     <motion.p
                         initial="hidden"
                         animate={inView ? "visible" : "hidden"}
-                        className="max-w-4xl font-poppins text-sm sm:text-lg text-gray-700 dark:text-gray-300 flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start"
+                        className="max-w-4xl  font-poppins text-sm sm:text-lg  text-gray-700 dark:text-gray-300 flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start"
                     >
-                        {"Front End Development | FullStack Solutions | 3D Animations"
+
+                        {"FullStack Development |Frontend  Development | 3D Animations"
                             .split("|")
                             .map((word, index) => (
                                 <React.Fragment key={index}>
                                     <motion.span
                                         custom={index}
                                         variants={textFadeVariants}
-                                        className="inline-flex items-center hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+                                        className="inline-flex items-center gap-3 border p-2  border-gray-300/60 bg-[#0a0615]/40 dark:bg-indigo-400/25 dark:shadow-[0_0_70px_rgba(124,58,237,0.2)] backdrop-blur-sm rounded-lg hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
                                         whileHover={{ scale: 1.05 }}
                                     >
+                                        <motion.span
+                                            className="h-2 w-2 bg-green-400 rounded-full"
+                                            animate={{
+                                                scale: [0.5, 1, 0.5],
+                                                opacity: [0.4, 1, 0.4],
+                                                boxShadow: ['0 0 0 0 rgba(74, 222, 128, 0)', '0 0 5px 2px rgba(74, 222, 128, 0.7)', '0 0 0 0 rgba(74, 222, 128, 0)']
+                                            }}
+                                            transition={{
+
+                                                repeat: Infinity,
+                                                ease: "easeInOut",
+                                                delay: Math.random() * 3,
+                                                duration: 4 + Math.random() * 3,
+                                            }}
+                                        />
                                         {word.trim()}
                                     </motion.span>
-                                    {index < 3 && (
-                                        <motion.span
-                                            custom={index + 0.5}
-                                            variants={textFadeVariants}
-                                            className="text-indigo-400"
-                                        >
-                                            •
-                                        </motion.span>
-                                    )}
+
                                 </React.Fragment>
                             ))}
                     </motion.p>
@@ -363,7 +395,7 @@ const Home = () => {
                     <motion.p
                         initial="hidden"
                         animate={inView ? "visible" : "hidden"}
-                        className="mt-8 text-sm sm:text-md md:text-lg font-light max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300"
+                        className="mt-8 text-sm sm:text-md md:text-lg line-clamp-2 font-light max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300"
                         style={{
                             textShadow: theme === 'dark'
                                 ? '0 0 10px rgba(124, 58, 237, 0.5)'
@@ -407,6 +439,11 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                             className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
                             whileHover={{ y: -3, scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
+                            style={{ boxShadow: profileShadow }}
+                            variants={buttonGlow}
+                            initial="initial"
+                            animate="animate"
+
                         >
                             Contact Me <FiArrowRight className="inline" />
                         </motion.a>
@@ -420,10 +457,14 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                         </motion.a>
                         <motion.a
                             href={assets.resume_fullstack}
+                            style={{ boxShadow: profileShadow }}
+                            variants={buttonGlow}
+                            initial="initial"
+                            animate="animate"
                             download
                             className="flex items-center gap-2 px-8 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                             whileHover={{ y: -3, scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
+                            whileTap={{ scale: 1 }}
                         >
                             Download CV <FiDownload className="inline" />
                         </motion.a>

@@ -10,6 +10,36 @@ import { useTheme } from '../ThemeContext/ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const getRandomGlow = () => {
+    const baseColor = 'rgba(124, 58, 237';
+    const intensity = (Math.random() * 0.4 + 0.9).toFixed(3); // 0.3–0.7
+    const delay = Math.random() * 2;
+    const duration = Math.random() * 2 + 3;
+
+    return {
+        initial: {
+            boxShadow: `0 0 0 0 ${baseColor}, ${intensity})`,
+            scale: 1
+        },
+        animate: {
+            boxShadow: [
+                `0 0 0 0 ${baseColor}, ${intensity})`,
+                `0 0 2px 30px ${baseColor}, 0)`,
+                `0 0 0 0 ${baseColor}, ${intensity})`
+            ],
+            scale: 1,
+            transition: {
+                duration,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: 'easeInOut',
+                delay
+            }
+        }
+    };
+};
+
+
 const Projects = () => {
     const sectionRef = useRef();
     const projectsRef = useRef([]);
@@ -63,6 +93,46 @@ const Projects = () => {
             image: assets.hostel
         }
     ];
+
+    const pulseGlow = {
+        initial: {
+            boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.7)',
+            scale: 1
+        },
+        animate: {
+            boxShadow: [
+                '0 0 0 0 rgba(124, 58, 237, 0.7)',
+                '0 0 3px 20px rgba(124, 58, 237, 0)',
+                '0 0 10px 0 rgba(124, 58, 237, 0)'
+            ],
+            scale: 1,
+            transition: {
+                duration: 4,
+                repeat: Infinity,
+                repeatDelay: 1
+            }
+        }
+    };
+
+    const imageGlow = {
+        initial: {
+            boxShadow: '0 0 0 0 rgba(124, 58, 237, 0.7)',
+            scale: 1
+        },
+        animate: {
+            boxShadow: [
+                '0 0 0 0 rgba(124, 58, 237, 0.7)',
+                '0 0 5px 70px rgba(124, 58, 237, 0)',
+                '0 0 10px 0 rgba(124, 58, 237, 0)'
+            ],
+            scale: 1,
+            transition: {
+                duration: 4,
+                repeat: Infinity,
+                repeatDelay: 1
+            }
+        }
+    };
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -210,19 +280,24 @@ const Projects = () => {
                             <div
                                 key={index}
                                 ref={el => projectsRef.current[index] = el}
-                                className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center relative z-10"
+                                className="grid grid-cols-1 rounded-xl md:grid-cols-5 gap-8 items-center relative z-10"
                             >
-                                <div
+                                <motion.div
                                     ref={el => markersRef.current[index] = el}
+                                    variants={pulseGlow}
+                                    initial="initial"
+                                    animate="animate"
                                     className="absolute -left-[15%]  md:-left-[4.1%] top-1/2 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-y-1/2"
                                 />
 
                                 {/* Project Image */}
                                 <motion.div
-                                    className="project-image md:col-span-2"
-                                    initial={{ opacity: 0, x: -60 }}
+                                    className="project-image rounded-2xl md:col-span-2"
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.7 }}
+                                    variants={getRandomGlow()}
+                                    initial="initial"
+                                    animate="animate"
                                     viewport={{ once: true, margin: "-100px" }}
                                 >
                                     <div className="relative h-64 w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden">
@@ -287,6 +362,9 @@ const Projects = () => {
                                                 href={project.github}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                variants={pulseGlow}
+                                                initial="initial"
+                                                animate="animate"
                                                 whileHover={{ y: -3, scale: 1.03 }}
                                                 whileTap={{ scale: 0.95 }}
                                                 className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all shadow-sm hover:shadow-md"
@@ -302,6 +380,9 @@ const Projects = () => {
                                                 rel="noopener noreferrer"
                                                 whileHover={{ y: -3, scale: 1.03 }}
                                                 whileTap={{ scale: 0.95 }}
+                                                variants={pulseGlow}
+                                                initial="initial"
+                                                animate="animate"
                                                 className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg transition-all shadow-lg hover:shadow-xl"
                                             >
                                                 <FiExternalLink className="text-lg" />
