@@ -13,6 +13,8 @@ import { FaAws } from "react-icons/fa"; // From FontAwesome
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+
 const Skill = () => {
   const particlesRef = useRef([]);
   const [pic, setPic] = useState([]);
@@ -395,13 +397,13 @@ const Skill = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
-                className="grid grid-cols-3 p-6 gap-6 rounded-xl border border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25  dark:border-white/60"
+                className="grid grid-cols-3 p-6 gap-6 rounded-xl border  border-black/10 bg-[#0a0615]/20 dark:bg-indigo-400/25  dark:border-white/60"
               >
                 {pic.map((element, index) => (
                   <motion.div
                     key={index}
                     ref={(el) => (imagesRef.current[index] = el)}
-                    className="code-card w-full  p-2 md:p-4 rounded-md shadow-md "
+                    className="code-card w-full  p-2 md:p-4 rounded-md  "
                     whileHover={{
                       scale: 1.1,
                       rotate: [0, -5, 5, -5, 0],

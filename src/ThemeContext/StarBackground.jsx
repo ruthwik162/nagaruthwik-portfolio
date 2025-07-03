@@ -13,7 +13,7 @@ const StarBackground = () => {
       container.innerHTML = '';
 
       const starColor = darkMode ? 'bg-white/80' : 'bg-indigo-700';
-      const starCount = window.innerWidth < 768 ? 50 : 100;
+      const starCount = window.innerWidth < 768 ? 80 : 400;
 
       for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');

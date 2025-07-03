@@ -14,9 +14,9 @@ const Home = () => {
     const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: false });
     const { theme } = useTheme();
     const homeRef = useRef(null);
-    const starsRef = useRef(null);
     const nameContainerRef = useRef(null);
-    const cursorRef = useRef(null);
+    const scrollIndicatorRef = useRef(null);
+
 
     // Enhanced animation variants
     const fadeRotateVariants = {
@@ -118,13 +118,13 @@ const Home = () => {
         animate: {
             boxShadow: [
                 `0 0 0 0 rgba(124, 58, 237, ${(0.6 + Math.random() * 0.4).toFixed(2)})`,
-                `0 0 5px ${Math.floor(Math.random() * 10 + 5)}px rgba(124, 58, 237, 0)`,
+                `0 0 3px ${Math.floor(Math.random() * 10 + 5)}px rgba(124, 58, 237, 0)`,
                 `0 0 10px 0 rgba(124, 58, 237, 0)`
             ],
             scale: [1, 1.02, 1],
             transition: {
-                duration: +(2 + Math.random() * 8).toFixed(2), // 2–6s
-                delay: +(Math.random() * 1.5).toFixed(2),      // 0–1.5s
+                duration: (2 + Math.random() * 8).toFixed(2), // 2–6s
+                delay: (Math.random() * 1.5).toFixed(2),      // 0–1.5s
                 repeat: Infinity,
                 repeatDelay: +(Math.random() * 0.8).toFixed(2), // 0–0.8s
                 ease: "easeInOut"
@@ -132,109 +132,127 @@ const Home = () => {
         }
     };
 
-
+    const scrollIndicator = {
+        initial: { opacity: 0, y: -10 },
+        animate: {
+            opacity: 1,
+            y: 0,
+            transition: { delay: 2.5, duration: 0.5 }
+        },
+        pulse: {
+            y: [0, -10, 0],
+            transition: {
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "reverse"
+            }
+        }
+    };
+    const scrollToNext = () => {
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        });
+    };
 
     const profileShadow = theme === 'dark'
         ? '0 0 70px rgba(124, 58, 237, 0.5)'
         : '0 0 150px rgba(250, 200, 50, 0.3)';
 
     useEffect(() => {
-        // Enhanced star creation with twinkling effect
-        const createStars = () => {
-            const container = starsRef.current;
-            if (!container) return;
+        if (!homeRef.current) return;
 
-            container.innerHTML = '';
-            const starCount = window.innerWidth < 768 ? 80 : 150;
+        const ctx = gsap.context(() => {
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: homeRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1,
+                },
+            }).to(homeRef.current, {
+                y: -100,
+                opacity: 0.8,
+                scale: 0.95,
+                ease: 'power2.out',
+            });
+        }, homeRef);
 
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                const size = Math.random() * 3 + 1;
-                const duration = 2 + Math.random() * 4;
-                const delay = Math.random() * 5;
-
-                star.className = 'absolute rounded-full bg-white';
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.opacity = `${Math.random() * 0.8 + 0.2}`;
-                star.style.animation = `starTwinkle ${duration}s ${delay}s infinite ease-in-out`;
-
-                container.appendChild(star);
-            }
-        };
-
-        // Cursor follower effect for name hover
-        const handleMouseMove = (e) => {
-            if (cursorRef.current && nameContainerRef.current) {
-                const rect = nameContainerRef.current.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                cursorRef.current.style.transform = `translate(${x - 15}px, ${y - 15}px)`;
-                cursorRef.current.style.opacity = '1';
-            }
-        };
-
-        const handleMouseLeave = () => {
-            if (cursorRef.current) {
-                cursorRef.current.style.opacity = '0';
-            }
-        };
-
-        createStars();
-        const resizeHandler = () => {
-            clearTimeout(window._starResizeTimeout);
-            window._starResizeTimeout = setTimeout(createStars, 300);
-        };
-
-        window.addEventListener('resize', resizeHandler);
-
-        if (nameContainerRef.current) {
-            nameContainerRef.current.addEventListener('mousemove', handleMouseMove);
-            nameContainerRef.current.addEventListener('mouseleave', handleMouseLeave);
-        }
-
-        // GSAP Scroll Animation with parallax effect
-        if (homeRef.current) {
-            const ctx = gsap.context(() => {
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: homeRef.current,
-                        start: 'top top',
-                        end: 'bottom top',
-                        scrub: 1,
-                    },
-                })
-                    .to(homeRef.current, {
-                        y: -100,
-                        opacity: 0.8,
-                        scale: 0.95,
-                        ease: 'power2.out',
-                    })
-                    .to(starsRef.current, {
-                        y: 100,
-                        ease: 'none'
-                    }, 0);
-            }, homeRef);
-
-
-        }
+        return () => ctx.revert(); // Clean up on unmount
     }, []);
+
+
+    const MouseScrollIndicator = () => (
+        <motion.svg
+            width="30"
+            height="50"
+            viewBox="0 0 30 50"
+            className="text-indigo-500 dark:text-indigo-300"
+            animate={{
+                y: [0, 10, 0],
+                opacity: [0.8, 1, 0.8]
+            }}
+            transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        >
+            {/* Mouse body */}
+            <rect
+                x="5"
+                y="5"
+                width="20"
+                height="35"
+                rx="10"
+                fill="transparent"
+                stroke="currentColor"
+                strokeWidth="2"
+            />
+            {/* Mouse wheel */}
+            <motion.rect
+                x="13.5"
+                y="10"
+                width="3"
+                height="5"
+                rx="1.5"
+                fill="currentColor"
+                animate={{
+                    y: [10, 20, 10],
+                    opacity: [0.8, 1, 0.6]
+                }}
+                transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0.3
+                }}
+            />
+            {/* Mouse scroll wheel indicator */}
+            <motion.circle
+                cx="15"
+                cy="40"
+                r="2"
+                fill="currentColor"
+                animate={{
+                    scale: [0.5, 1, 0.5],
+                    opacity: [0.4, 1, 0.4]
+                }}
+                transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+            />
+        </motion.svg>
+    );
 
     return (
         <div
             ref={ref}
-            className="relative  z-10 px-2 pt-28 min-h-screen md:pt-20 md:px-16 lg:px-32 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden flex flex-col justify-center"
+            className="relative px-4 md:pt-40 pt-20 md:pb-20 md:px-10 bg-white dark:bg-gradient-to-br dark:bg-[#0a0518] text-black dark:text-white overflow-hidden"
         >
-            {/* Enhanced star background with twinkling animation */}
-            <div
-                ref={starsRef}
-                className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-            />
+
             <StarBackground />
-            {/* Custom cursor follower for name hover */}
 
 
             <div ref={homeRef}>
@@ -470,6 +488,29 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                         </motion.a>
                     </motion.div>
                 </div>
+
+                {/* Scroll down indicator with mouse SVG */}
+                <motion.div
+                    ref={scrollIndicatorRef}
+                    className="w-full flex justify-center pt-1 pb-4 md:pt-0 md:absolute md:bottom-10 cursor-pointer z-20"
+                    onClick={scrollToNext}
+                    initial="initial"
+                    animate={["animate", "pulse"]}
+                    variants={scrollIndicator}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    <div className="flex flex-col items-center">
+                        <motion.span
+                            className="text-sm text-indigo-500 dark:text-indigo-300 mb-3 font-light"
+                            animate={{ opacity: [0.4, 1, 0.4] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        >
+                            View More
+                        </motion.span>
+                        <MouseScrollIndicator />
+                        <div className="absolute -inset-4 rounded-full bg-indigo-500/10 opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
+                    </div>
+                </motion.div>
             </div>
 
 
