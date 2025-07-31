@@ -490,7 +490,7 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                 </div>
 
                 {/* Scroll down indicator with mouse SVG */}
-                <motion.div
+                {/* <motion.div
                     ref={scrollIndicatorRef}
                     className="w-full flex justify-center pt-1 pb-4 md:pt-0 md:absolute md:bottom-10 cursor-pointer z-20"
                     onClick={scrollToNext}
@@ -510,7 +510,7 @@ Hey! I’m Nagaruthwik, I’m a Full Stack Developer passionate about building s
                         <MouseScrollIndicator />
                         <div className="absolute -inset-4 rounded-full bg-indigo-500/10 opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
                     </div>
-                </motion.div>
+                </motion.div> */}
             </div>
 
 

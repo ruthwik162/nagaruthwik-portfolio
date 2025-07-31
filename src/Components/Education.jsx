@@ -23,7 +23,6 @@ const Education = () => {
             institution: "Malla Reddy University",
             location: "Hyderabad, Telangana, India",
             period: "August 2022 - March 2026 (Present- Final Year)",
-            score: "CGPA: 8.0",
             description: "Currently pursuing my Bachelor's degree in Computer Science with a focus on software development, algorithms, and data structures. Coursework includes web development, database systems.",
             icon: "🎓"
         },

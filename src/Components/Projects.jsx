@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
@@ -7,12 +7,11 @@ import StarBackground from '../ThemeContext/StarBackground';
 import { assets } from '../assets/assets';
 import { useTheme } from '../ThemeContext/ThemeContext';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const getRandomGlow = () => {
     const baseColor = 'rgba(124, 58, 237';
-    const intensity = (Math.random() * 0.4 + 0.9).toFixed(3); // 0.3–0.7
+    const intensity = (Math.random() * 0.4 + 0.9).toFixed(3);
     const delay = Math.random() * 2;
     const duration = Math.random() * 2 + 3;
 
@@ -39,7 +38,6 @@ const getRandomGlow = () => {
     };
 };
 
-
 const Projects = () => {
     const sectionRef = useRef();
     const projectsRef = useRef([]);
@@ -50,49 +48,58 @@ const Projects = () => {
     const projectContainerRef = useRef();
     const lineProgressRef = useRef();
     const { expandedDescriptions, toggleDescription } = useTheme();
+    const [showAllProjects, setShowAllProjects] = useState(false);
 
-
-    const projects = [
-        {
-            title: "E-Commerce Platform",
-            description:
-                "A full-stack e-commerce web application built with a modern MERN stack (MongoDB, Express.js, React, Node.js). This platform allows users to browse products, manage their carts, and securely purchase items using integrated Stripe payment processing. Implemented robust user authentication using JWT tokens, including secure cookie-based login sessions. Admin panel functionality enables product management, order tracking, and user role assignments. The project emphasizes scalable architecture, reusable components, and secure backend practices.",
-            features: [
-                "Responsive, modern UI built with React and Vite",
-                "User authentication and authorization using JWT",
-                "Secure login/session management with HTTP-only cookies",
-                "Product listing, search, filter, and category-based browsing",
-                "Shopping cart with real-time item quantity updates",
-                "Stripe-integrated checkout and payment system",
-                "Admin dashboard for product and order management",
-                "MongoDB Atlas for scalable cloud database storage",
-                "Error handling, input validation, and loading states for better UX"
-            ],
-            technologies: ["React", "Vite", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Axios", "Tailwind CSS"],
-            github: "https://github.com/ruthwik162/e-commerce",
-            liveDemo: "https://e-commerce-ten-rose-60.vercel.app/",
-            image: assets.ecommers
-        },
-
-        {
-            title: "Teacher-Student Appointment",
-            description:
-                "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
-            technologies: ["MERN-Stack", "GSAP", "Firebase", "Framer Motion", "SEO", "Tailwind CSS"],
-            github: "https://github.com/ruthwik162/teacher-student-appointment",
-            liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
-            image: assets.mainbanner
-        },
-        {
-            title: "Hostel Management Web Application",
-            description:
-                "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
-            technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security", "Tailwind CSS"],
-            github: "https://github.com/ruthwik162/malla-reddy-university",
-            liveDemo: "https://ruthwik162.github.io/malla-reddy-university/",
-            image: assets.hostel
-        }
-    ];
+    const projects = {
+        major: [
+            {
+                title: "E-Commerce Platform",
+                description: "A full-stack e-commerce web application built with a modern MERN stack (MongoDB, Express.js, React, Node.js). This platform allows users to browse products, manage their carts, and securely purchase items using integrated Stripe payment processing. Implemented robust user authentication using JWT tokens, including secure cookie-based login sessions. Admin panel functionality enables product management, order tracking, and user role assignments. The project emphasizes scalable architecture, reusable components, and secure backend practices.",
+                features: [
+                    "Responsive, modern UI built with React and Vite",
+                    "User authentication and authorization using JWT",
+                    "Secure login/session management with HTTP-only cookies",
+                    "Product listing, search, filter, and category-based browsing",
+                    "Shopping cart with real-time item quantity updates",
+                    "Stripe-integrated checkout and payment system",
+                    "Admin dashboard for product and order management",
+                    "MongoDB Atlas for scalable cloud database storage",
+                    "Error handling, input validation, and loading states for better UX"
+                ],
+                technologies: ["React", "Vite", "Node.js", "Express", "MongoDB", "Stripe API", "JWT", "Axios", "Tailwind CSS"],
+                github: "https://github.com/ruthwik162/e-commerce",
+                liveDemo: "https://e-commerce-ten-rose-60.vercel.app/",
+                image: assets.ecommers
+            },
+            {
+                title: "Teacher-Student Appointment",
+                description: "A full-stack web application designed to streamline academic scheduling between students and teachers. This project enables seamless booking of appointments, allowing students to view faculty availability by department, book time slots, and receive confirmation—all through an intuitive, responsive interface.\n\nTeachers have their own dashboard to manage, approve, or decline requests and monitor upcoming sessions.\n\nKey Features:\n• Real-time student–teacher appointment booking\n• Department-wise faculty browsing\n• Teacher and student dashboards with appointment history\n• Admin access to update/delete teacher/student and view all appointments\n• Login system with role-based access\n• Smooth UI/UX with animated transitions\n• Fully responsive across devices\n• Deployed on Render with dynamic routing",
+                technologies: ["MERN-Stack", "GSAP", "Firebase", "Framer Motion", "SEO", "Tailwind CSS"],
+                github: "https://github.com/ruthwik162/teacher-student-appointment",
+                liveDemo: "https://teacher-student-appointment-a7hf.onrender.com/",
+                image: assets.mainbanner
+            },
+            {
+                title: "Hostel Management Web Application",
+                description: "Developed a full-stack web application to streamline university hostel operations, with separate dashboards for students and administrators.\n\n🔹 User Features:\n• JWT-based signup & login for secure access\n• Room browsing and plan selection (boys/girls)\n• Razorpay integration for seamless payments\n• Automated room allocation after payment using Razorpay transaction ID\n\n🔹 Admin Features:\n• Admin dashboard for managing room assignments, viewing occupancy, and tracking user activity\n• Complaint system for students to report issues\n• Predictive food planning using regression models to forecast needs\n\n🔧 Stack: Spring Boot REST APIs, React + Tailwind CSS frontend, and Spring Security for role-based access.",
+                technologies: ["React", "Spring Boot", "Tailwind CSS", "Razorpay", "Spring Security", "Tailwind CSS"],
+                github: "https://github.com/ruthwik162/malla-reddy-university",
+                liveDemo: "https://malla-reddy-university.vercel.app/",
+                image: assets.hostel
+            }
+        ],
+        minor: [
+            
+            {
+                title: "Weather Dashboard",
+                description: "A responsive weather application that displays current weather conditions and forecasts using data from the OpenWeatherMap API. Features include location search, temperature unit switching, and animated weather icons.",
+                technologies: ["React", "OpenWeatherMap API", "CSS Modules"],
+                github: "https://github.com/ruthwik162/weather-app",
+                liveDemo: "https://weather-app-nagaruthwiks-projects.vercel.app/",
+                image: assets.weather
+            }
+        ]
+    };
 
     const pulseGlow = {
         initial: {
@@ -184,6 +191,8 @@ const Projects = () => {
 
             // Projects animation
             projectsRef.current.forEach((project, index) => {
+                if (!project) return;
+                
                 gsap.from(project, {
                     scrollTrigger: {
                         trigger: project,
@@ -198,35 +207,41 @@ const Projects = () => {
                 });
 
                 const img = project.querySelector('.project-image img');
-                gsap.from(img, {
-                    scrollTrigger: {
-                        trigger: project,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    },
-                    scale: 0.9,
-                    opacity: 0,
-                    duration: 1.2,
-                    ease: "power3.out"
-                });
+                if (img) {
+                    gsap.from(img, {
+                        scrollTrigger: {
+                            trigger: project,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        },
+                        scale: 0.9,
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: "power3.out"
+                    });
+                }
 
                 // Marker animation
-                gsap.from(markersRef.current[index], {
-                    scrollTrigger: {
-                        trigger: project,
-                        start: "top 75%",
-                        toggleActions: "play none none none"
-                    },
-                    scale: 0,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "elastic.out(1, 0.5)"
-                });
+                if (markersRef.current[index]) {
+                    gsap.from(markersRef.current[index], {
+                        scrollTrigger: {
+                            trigger: project,
+                            start: "top 75%",
+                            toggleActions: "play none none none"
+                        },
+                        scale: 0,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "elastic.out(1, 0.5)"
+                    });
+                }
             });
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [showAllProjects]);
+
+    const displayedProjects = showAllProjects ? [...projects.major, ...projects.minor] : projects.major;
 
     return (
         <section
@@ -255,6 +270,23 @@ const Projects = () => {
                     </motion.p>
                 </div>
 
+                <div className="flex justify-center mb-12">
+                    <div className="inline-flex rounded-lg bg-gray-100 dark:bg-gray-800 p-1">
+                        <button
+                            onClick={() => setShowAllProjects(false)}
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${!showAllProjects ? 'bg-white dark:bg-gray-700 shadow-sm text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'}`}
+                        >
+                            Major Projects
+                        </button>
+                        <button
+                            onClick={() => setShowAllProjects(true)}
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${showAllProjects ? 'bg-white dark:bg-gray-700 shadow-sm text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'}`}
+                        >
+                            All Projects
+                        </button>
+                    </div>
+                </div>
+
                 <div ref={projectContainerRef} className="relative">
                     {/* Vertical timeline line container */}
                     <div className="absolute md:block hidden left-1/2 md:left-10 top-0 h-full w-0.5 transform -translate-x-1/2 md:translate-x-0 z-0 overflow-hidden">
@@ -275,8 +307,7 @@ const Projects = () => {
                     <div className="absolute md:block hidden left-1/2 md:left-10 top-0 h-5 w-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-[#0a0518] z-10 transform -translate-x-1/2 md:-translate-x-2" />
 
                     <div className="space-y-12 md:space-y-12 ml-0 md:ml-20">
-
-                        {projects.map((project, index) => (
+                        {displayedProjects.map((project, index) => (
                             <div
                                 key={index}
                                 ref={el => projectsRef.current[index] = el}
@@ -315,7 +346,7 @@ const Projects = () => {
                                 {/* Project Content */}
                                 <div className="md:col-span-3">
                                     <span className="text-sm font-mono text-indigo-600 dark:text-indigo-400">
-                                        Project {index + 1} of {projects.length}
+                                        Project {index + 1} of {displayedProjects.length}
                                     </span>
                                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mt-2 mb-4">
                                         {project.title}
@@ -362,7 +393,7 @@ const Projects = () => {
                                                 href={project.github}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                variants={pulseGlow}
+                                                
                                                 initial="initial"
                                                 animate="animate"
                                                 whileHover={{ y: -3, scale: 1.03 }}
@@ -410,7 +441,7 @@ const Projects = () => {
                         Explore my GitHub for additional work, contributions, and experiments with various technologies.
                     </p>
                     <motion.a
-                        href="https://github.com/yourusername"
+                        href="https://github.com/ruthwik162"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05, y: -3 }}

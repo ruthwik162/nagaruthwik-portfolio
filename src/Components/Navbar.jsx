@@ -25,6 +25,7 @@ const Navbar = () => {
     { name: "Skills", href: "#skill" },
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
   ];
 
   const socialIcons = [
@@ -128,6 +129,12 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 md:hidden">
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+
+          >
+            <ThemeToggle />
+          </motion.div>
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             whileHover={{ scale: 1.1 }}
@@ -135,6 +142,7 @@ const Navbar = () => {
             className="p-1"
             aria-label="Menu"
           >
+            
             <svg
               className="h-6 w-6"
               fill="none"
